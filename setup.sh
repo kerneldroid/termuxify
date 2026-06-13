@@ -6,6 +6,9 @@ set -e
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 BACKUP_DIR="$HOME/.termuxify_backup_$TIMESTAMP"
 BIN_DIR="${PREFIX}/bin"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPTS="ty tt ah tc dmg"
+SHARED_PACKAGES="starship atuin wget curl git unzip tsu ncurses-utils gum"
 
 # Ensure we are in Termux
 if [ -z "$PREFIX" ]; then
@@ -14,6 +17,40 @@ if [ -z "$PREFIX" ]; then
 fi
 
 echo -e "\e[1;34m[*] Termuxify Installer\e[0m"
+
+INSTALL_MODE="install"
+if [ -f "$BIN_DIR/ty" ] || [ -f "$BIN_DIR/tt" ]; then
+    echo -e "\e[1;34m[*] Existing Termuxify installation detected.\e[0m"
+    echo -e "  \e[1;32m1)\e[0m Update (Safely update binaries and dependencies)"
+    echo -e "  \e[1;32m2)\e[0m Reinstall (Creates new backup, asks for shell, resets configs)"
+    read -p "Selection [1-2, default: 1]: " mode_choice
+    
+    if [ "$mode_choice" != "2" ]; then
+        INSTALL_MODE="update"
+    fi
+fi
+
+if [ "$INSTALL_MODE" == "update" ]; then
+    echo -e "\e[1;33m[*] Updating Termuxify...\e[0m"
+    pkg update -y
+    pkg install -y $SHARED_PACKAGES
+    
+    echo -e "\e[1;33m[*] Updating binaries in $BIN_DIR...\e[0m"
+    mkdir -p "$BIN_DIR"
+    for script in $SCRIPTS; do
+        if [ -f "$SCRIPT_DIR/src/$script" ]; then
+            cp "$SCRIPT_DIR/src/$script" "$BIN_DIR/$script"
+            chmod +x "$BIN_DIR/$script"
+        fi
+    done
+    
+    echo -e "\e[1;33m[*] Updating NerdFetch...\e[0m"
+    wget -qO "$BIN_DIR/nerdfetch" "https://raw.githubusercontent.com/ThatOneCalculator/NerdFetch/main/nerdfetch" || echo -e "\e[1;31m[!] Failed to download NerdFetch\e[0m"
+    [ -f "$BIN_DIR/nerdfetch" ] && chmod +x "$BIN_DIR/nerdfetch"
+
+    echo -e "\e[1;32m[+] Termuxify successfully updated!\e[0m"
+    exit 0
+fi
 
 # Shell selection
 echo -e "\n\e[1;34m[*] Select primary shell:\e[0m"
@@ -33,7 +70,6 @@ esac
 echo -e "\e[1;33m[*] Updating package repositories...\e[0m"
 pkg update -y
 
-SHARED_PACKAGES="starship atuin wget curl git unzip tsu ncurses-utils gum"
 echo -e "\e[1;33m[*] Installing dependencies...\e[0m"
 pkg install -y $SHARED_PACKAGES
 
@@ -55,9 +91,9 @@ done
 # Install scripts
 echo -e "\e[1;33m[*] Deploying binaries to $BIN_DIR...\e[0m"
 mkdir -p "$BIN_DIR"
-for script in ty tt ah tc dmg; do
-    if [ -f "src/$script" ]; then
-        cp "src/$script" "$BIN_DIR/$script"
+for script in $SCRIPTS; do
+    if [ -f "$SCRIPT_DIR/src/$script" ]; then
+        cp "$SCRIPT_DIR/src/$script" "$BIN_DIR/$script"
         chmod +x "$BIN_DIR/$script"
     fi
 done
@@ -131,7 +167,7 @@ echo -e "\e[1;32m[+] Starting the TUI (ty) for initial setup...\e[0m"
 if [ -f "$BIN_DIR/ty" ]; then
     "$BIN_DIR/ty"
 else
-    env bash ./src/ty
+    env bash "$SCRIPT_DIR/src/ty"
 fi
 
 echo -e "\n\e[1;32m[SUCCESS] Termuxify is installed.\e[0m"
