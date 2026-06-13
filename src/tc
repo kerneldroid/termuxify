@@ -14,30 +14,31 @@ call_gum() {
 
 echo -e "\e[1;34m[*] Running TermuxCode (tc)...\e[0m"
 
-CHOICE=$(call_gum choose "Python 3.13 (Enable JIT)" "Python + Numba (JIT)" "Lua" "LuaJIT" --header "Select Development Stack:")
+CHOICE=$(call_gum choose "Python 3.13 (Enable JIT)" "Python + Numba (JIT)" "Node.js (LTS)" "Go" "Rust" "Lua" "LuaJIT" --header "Select Development Stack:")
 
 call_gum spin --spinner dot --title "Updating package lists..." -- pkg update -y
 
 case "$CHOICE" in
   "Python 3.13 (Enable JIT)")
     call_gum spin --spinner dot --title "Installing Python 3.13..." -- pkg install -y python
-    
-    # Enable JIT via environment variables
-    # For Bash
     if ! grep -q "PYTHON_JIT" "$HOME/.bashrc"; then
         echo -e "\n# Termuxify: Enable Python 3.13 JIT\nexport PYTHON_JIT=1" >> "$HOME/.bashrc"
     fi
-    # For Nushell
-    if [ -f "$HOME/.config/nushell/env.nu" ]; then
-        if ! grep -q "PYTHON_JIT" "$HOME/.config/nushell/env.nu"; then
-            echo -e "\n\$env.PYTHON_JIT = '1'" >> "$HOME/.config/nushell/env.nu"
-        fi
-    fi
-    echo -e "\e[1;32m[+] Python 3.13 JIT enabled! (Restart shell to apply)\e[0m"
+    [ -f "$HOME/.config/nushell/env.nu" ] && ! grep -q "PYTHON_JIT" "$HOME/.config/nushell/env.nu" && echo -e "\n\$env.PYTHON_JIT = '1'" >> "$HOME/.config/nushell/env.nu"
+    echo -e "\e[1;32m[+] Python 3.13 JIT enabled!\e[0m"
     ;;
   "Python + Numba (JIT)")
     call_gum spin --spinner dot --title "Setting up TUR repository..." -- pkg install -y tur-repo
     call_gum spin --spinner dot --title "Installing Python and Numba..." -- pkg install -y python python-numba
+    ;;
+  "Node.js (LTS)")
+    call_gum spin --spinner dot --title "Installing Node.js..." -- pkg install -y nodejs
+    ;;
+  "Go")
+    call_gum spin --spinner dot --title "Installing Go..." -- pkg install -y golang
+    ;;
+  "Rust")
+    call_gum spin --spinner dot --title "Installing Rust..." -- pkg install -y rust
     ;;
   "Lua")
     call_gum spin --spinner dot --title "Installing Lua..." -- pkg install -y lua54

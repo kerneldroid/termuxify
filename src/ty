@@ -19,20 +19,50 @@ call_gum() {
 
 # Theme Definitions
 declare -A THEMES
+
+# --- Gruvbox & Others ---
 THEMES["Gruvbox"]="background=#282828\nforeground=#ebdbb2\ncursor=#ebdbb2\ncolor0=#282828\ncolor1=#cc241d\ncolor2=#98971a\ncolor3=#d79921\ncolor4=#458588\ncolor5=#b16286\ncolor6=#689d6a\ncolor7=#a89984\ncolor8=#928374\ncolor9=#fb4934\ncolor10=#b8bb26\ncolor11=#fabd2f\ncolor12=#83a598\ncolor13=#d3869b\ncolor14=#8ec07c\ncolor15=#ebdbb2"
 THEMES["Gruvbox Material"]="background=#1d2021\nforeground=#d4be98\ncursor=#d4be98\ncolor0=#32302f\ncolor1=#ea6962\ncolor2=#a9b665\ncolor3=#d8a657\ncolor4=#7daea3\ncolor5=#d3869b\ncolor6=#89b482\ncolor7=#d4be98\ncolor8=#32302f\ncolor9=#ea6962\ncolor10=#a9b665\ncolor11=#d8a657\ncolor12=#7daea3\ncolor13=#d3869b\ncolor14=#89b482\ncolor15=#d4be98"
 THEMES["Everforest"]="background=#2d353b\nforeground=#d3c6aa\ncursor=#d3c6aa\ncolor0=#475258\ncolor1=#e67e80\ncolor2=#a7c080\ncolor3=#dbbc7f\ncolor4=#7fbbb3\ncolor5=#d699b6\ncolor6=#83c092\ncolor7=#d3c6aa\ncolor8=#475258\ncolor9=#e67e80\ncolor10=#a7c080\ncolor11=#dbbc7f\ncolor12=#7fbbb3\ncolor13=#d699b6\ncolor14=#83c092\ncolor15=#d3c6aa"
+THEMES["Nord"]="background=#2e3440\nforeground=#d8dee9\ncursor=#d8dee9\ncolor0=#3b4252\ncolor1=#bf616a\ncolor2=#a3be8c\ncolor3=#ebcb8b\ncolor4=#81a1c1\ncolor5=#b48ead\ncolor6=#88c0d0\ncolor7=#e5e9f0\ncolor8=#4c566a\ncolor9=#bf616a\ncolor10=#a3be8c\ncolor11=#ebcb8b\ncolor12=#81a1c1\ncolor13=#b48ead\ncolor14=#8fbcbb\ncolor15=#eceff4"
+THEMES["Tokyo Night"]="background=#1a1b26\nforeground=#a9b1d6\ncursor=#c0caf5\ncolor0=#15161e\ncolor1=#f7768e\ncolor2=#9ece6a\ncolor3=#e0af68\ncolor4=#7aa2f7\ncolor5=#bb9af7\ncolor6=#7dcfff\ncolor7=#a9b1d6\ncolor8=#414868\ncolor9=#f7768e\ncolor10=#9ece6a\ncolor11=#e0af68\ncolor12=#7aa2f7\ncolor13=#bb9af7\ncolor14=#7dcfff\ncolor15=#c0caf5"
+
+# --- Catppuccin ---
 THEMES["Catppuccin Mocha"]="background=#1e1e2e\nforeground=#cdd6f4\ncursor=#f5e0dc\ncolor0=#45475a\ncolor1=#f38ba8\ncolor2=#a6e3a1\ncolor3=#f9e2af\ncolor4=#8caaee\ncolor5=#f5c2e7\ncolor6=#94e2d5\ncolor7=#bac2de\ncolor8=#585b70\ncolor9=#f38ba8\ncolor10=#a6e3a1\ncolor11=#f9e2af\ncolor12=#8caaee\ncolor13=#f5c2e7\ncolor14=#94e2d5\ncolor15=#a6adc8"
 THEMES["Catppuccin Macchiato"]="background=#24273a\nforeground=#cad3f5\ncursor=#f4dbd6\ncolor0=#494d64\ncolor1=#ed8796\ncolor2=#a6da95\ncolor3=#eed49f\ncolor4=#8aadf4\ncolor5=#f5bde6\ncolor6=#8bd5ca\ncolor7=#b8c0e0\ncolor8=#5b6078\ncolor9=#ed8796\ncolor10=#a6da95\ncolor11=#eed49f\ncolor12=#8aadf4\ncolor13=#f5bde6\ncolor14=#8bd5ca\ncolor15=#a5adcb"
 THEMES["Catppuccin Frappe"]="background=#303446\nforeground=#c6d0f5\ncursor=#f2d5cf\ncolor0=#51576d\ncolor1=#e78284\ncolor2=#a6d189\ncolor3=#e5c890\ncolor4=#8caaee\ncolor5=#f4b8e4\ncolor6=#81c8be\ncolor7=#b5bfe2\ncolor8=#626880\ncolor9=#e78284\ncolor10=#a6d189\ncolor11=#e5c890\ncolor12=#8caaee\ncolor13=#f4b8e4\ncolor14=#81c8be\ncolor15=#a5adce"
 THEMES["Catppuccin Latte"]="background=#eff1f5\nforeground=#4c4f69\ncursor=#dc8a78\ncolor0=#bcc0cc\ncolor1=#d20f39\ncolor2=#40a02b\ncolor3=#df8e1d\ncolor4=#1e66f5\ncolor5=#ea76cb\ncolor6=#179299\ncolor7=#acb0be\ncolor8=#acb0be\ncolor9=#d20f39\ncolor10=#40a02b\ncolor11=#df8e1d\ncolor12=#1e66f5\ncolor13=#ea76cb\ncolor14=#179299\ncolor15=#bcc0cc"
-THEMES["Nord"]="background=#2e3440\nforeground=#d8dee9\ncursor=#d8dee9\ncolor0=#3b4252\ncolor1=#bf616a\ncolor2=#a3be8c\ncolor3=#ebcb8b\ncolor4=#81a1c1\ncolor5=#b48ead\ncolor6=#88c0d0\ncolor7=#e5e9f0\ncolor8=#4c566a\ncolor9=#bf616a\ncolor10=#a3be8c\ncolor11=#ebcb8b\ncolor12=#81a1c1\ncolor13=#b48ead\ncolor14=#8fbcbb\ncolor15=#eceff4"
-THEMES["Tokyo Night"]="background=#1a1b26\nforeground=#a9b1d6\ncursor=#c0caf5\ncolor0=#15161e\ncolor1=#f7768e\ncolor2=#9ece6a\ncolor3=#e0af68\ncolor4=#7aa2f7\ncolor5=#bb9af7\ncolor6=#7dcfff\ncolor7=#a9b1d6\ncolor8=#414868\ncolor9=#f7768e\ncolor10=#9ece6a\ncolor11=#e0af68\ncolor12=#7aa2f7\ncolor13=#bb9af7\ncolor14=#7dcfff\ncolor15=#c0caf5"
+
+# --- Kanagawa ---
+THEMES["Kanagawa Wave"]="background=#1f1f28\nforeground=#dcd7ba\ncursor=#c8c093\ncolor0=#16161d\ncolor1=#c34043\ncolor2=#76946a\ncolor3=#c0a36e\ncolor4=#7e9cd8\ncolor5=#957fb8\ncolor6=#6a9589\ncolor7=#c8c093\ncolor8=#727169\ncolor9=#e82424\ncolor10=#98bb6c\ncolor11=#e6c384\ncolor12=#7fb4ca\ncolor13=#938aa9\ncolor14=#7aa89f\ncolor15=#dcd7ba"
+THEMES["Kanagawa Dragon"]="background=#181616\nforeground=#c5c9c5\ncursor=#c8c093\ncolor0=#0d0c0c\ncolor1=#c4746e\ncolor2=#8a9a7b\ncolor3=#c3a361\ncolor4=#8ba4b0\ncolor5=#a292a3\ncolor6=#8ea4a2\ncolor7=#c8c093\ncolor8=#a6a69c\ncolor9=#e46876\ncolor10=#87a987\ncolor11=#e4c2a3\ncolor12=#7fb4ca\ncolor13=#938aa9\ncolor14=#7aa89f\ncolor15=#c5c9c5"
+THEMES["Kanagawa Lotus"]="background=#f2ecbc\nforeground=#545464\ncursor=#43436c\ncolor0=#1f1f28\ncolor1=#c84051\ncolor2=#6f894a\ncolor3=#77713f\ncolor4=#4d699b\ncolor5=#b35b79\ncolor6=#597b75\ncolor7=#545464\ncolor8=#8a8a8a\ncolor9=#d7474b\ncolor10=#6e915f\ncolor11=#836f33\ncolor12=#6693bf\ncolor13=#ad5c7c\ncolor14=#628e83\ncolor15=#dcd7ba"
+
+# --- Oxocarbon ---
+THEMES["Oxocarbon Dark"]="background=#161616\nforeground=#ffffff\ncursor=#ffffff\ncolor0=#161616\ncolor1=#ee5396\ncolor2=#42be65\ncolor3=#ff7eb6\ncolor4=#33b1ff\ncolor5=#be95ff\ncolor6=#08bdba\ncolor7=#dde1e4\ncolor8=#393939\ncolor9=#ee5396\ncolor10=#42be65\ncolor11=#ff7eb6\ncolor12=#33b1ff\ncolor13=#be95ff\ncolor14=#08bdba\ncolor15=#ffffff"
+THEMES["Oxocarbon Light"]="background=#f2f4f8\nforeground=#393939\ncursor=#393939\ncolor0=#f2f4f8\ncolor1=#ff7eb6\ncolor2=#08bdba\ncolor3=#ee5396\ncolor4=#33b1ff\ncolor5=#be95ff\ncolor6=#42be65\ncolor7=#dde1e4\ncolor8=#a8a8a8\ncolor9=#ff7eb6\ncolor10=#08bdba\ncolor11=#ee5396\ncolor12=#33b1ff\ncolor13=#be95ff\ncolor14=#42be65\ncolor15=#161616"
+
+# --- Aethel ---
+THEMES["Aethel Dark Hard"]="background=#11161a\nforeground=#e3dcce\ncursor=#e3dcce\ncolor0=#11161a\ncolor1=#d28b84\ncolor2=#a1b183\ncolor3=#caa16e\ncolor4=#82aeca\ncolor5=#cca3ba\ncolor6=#81b5ac\ncolor7=#e3dcce\ncolor8=#53595f\ncolor9=#d28b84\ncolor10=#a1b183\ncolor11=#caa16e\ncolor12=#82aeca\ncolor13=#cca3ba\ncolor14=#81b5ac\ncolor15=#faf5eb"
+THEMES["Aethel Dark Medium"]="background=#1a1f24\nforeground=#e3dcce\ncursor=#e3dcce\ncolor0=#1a1f24\ncolor1=#d28b84\ncolor2=#a1b183\ncolor3=#caa16e\ncolor4=#82aeca\ncolor5=#cca3ba\ncolor6=#81b5ac\ncolor7=#e3dcce\ncolor8=#53595f\ncolor9=#d28b84\ncolor10=#a1b183\ncolor11=#caa16e\ncolor12=#82aeca\ncolor13=#cca3ba\ncolor14=#81b5ac\ncolor15=#faf5eb"
+THEMES["Aethel Dark Soft"]="background=#24292d\nforeground=#e3dcce\ncursor=#e3dcce\ncolor0=#24292d\ncolor1=#d28b84\ncolor2=#a1b183\ncolor3=#caa16e\ncolor4=#82aeca\ncolor5=#cca3ba\ncolor6=#81b5ac\ncolor7=#e3dcce\ncolor8=#53595f\ncolor9=#d28b84\ncolor10=#a1b183\ncolor11=#caa16e\ncolor12=#82aeca\ncolor13=#cca3ba\ncolor14=#81b5ac\ncolor15=#faf5eb"
+THEMES["Aethel Light Hard"]="background=#ebdcbe\nforeground=#3a3429\ncursor=#3a3429\ncolor0=#ebdcbe\ncolor1=#8c4b44\ncolor2=#4e6b3b\ncolor3=#7d5b22\ncolor4=#2b6189\ncolor5=#844a70\ncolor6=#256e62\ncolor7=#3a3429\ncolor8=#7e786b\ncolor9=#8c4b44\ncolor10=#4e6b3b\ncolor11=#7d5b22\ncolor12=#2b6189\ncolor13=#844a70\ncolor14=#256e62\ncolor15=#11161a"
+THEMES["Aethel Light Medium"]="background=#f5eada\nforeground=#3a3429\ncursor=#3a3429\ncolor0=#f5eada\ncolor1=#8c4b44\ncolor2=#4e6b3b\ncolor3=#7d5b22\ncolor4=#2b6189\ncolor5=#844a70\ncolor6=#256e62\ncolor7=#3a3429\ncolor8=#7e786b\ncolor9=#8c4b44\ncolor10=#4e6b3b\ncolor11=#7d5b22\ncolor12=#2b6189\ncolor13=#844a70\ncolor14=#256e62\ncolor15=#11161a"
+THEMES["Aethel Light Soft"]="background=#faf5eb\nforeground=#3a3429\ncursor=#3a3429\ncolor0=#faf5eb\ncolor1=#8c4b44\ncolor2=#4e6b3b\ncolor3=#7d5b22\ncolor4=#2b6189\ncolor5=#844a70\ncolor6=#256e62\ncolor7=#3a3429\ncolor8=#7e786b\ncolor9=#8c4b44\ncolor10=#4e6b3b\ncolor11=#7d5b22\ncolor12=#2b6189\ncolor13=#844a70\ncolor14=#256e62\ncolor15=#11161a"
 
 ACTION=$(call_gum choose "Theme & Font Selection" "Change Default Shell" --header "Termuxify Menu:")
 
 if [ "$ACTION" = "Theme & Font Selection" ]; then
-  THEME_NAME=$(call_gum choose "${!THEMES[@]}" --header "Select Termux Theme:")
+  CATEGORY=$(call_gum choose "Aethel" "Catppuccin" "Kanagawa" "Oxocarbon" "Gruvbox" "Everforest" "Nord" "Tokyo Night" --header "Select Theme Category:")
+  
+  case "$CATEGORY" in
+    "Aethel") THEME_NAME=$(call_gum choose "Aethel Dark Hard" "Aethel Dark Medium" "Aethel Dark Soft" "Aethel Light Hard" "Aethel Light Medium" "Aethel Light Soft") ;;
+    "Catppuccin") THEME_NAME=$(call_gum choose "Catppuccin Mocha" "Catppuccin Macchiato" "Catppuccin Frappe" "Catppuccin Latte") ;;
+    "Kanagawa") THEME_NAME=$(call_gum choose "Kanagawa Wave" "Kanagawa Dragon" "Kanagawa Lotus") ;;
+    "Oxocarbon") THEME_NAME=$(call_gum choose "Oxocarbon Dark" "Oxocarbon Light") ;;
+    *) THEME_NAME="$CATEGORY" ;;
+  esac
+
   FONT=$(call_gum choose "IBM Plex Mono" "Google Sans Code" "Ioskeley Mono" --header "Select Termux Font:")
 
   mkdir -p ~/.termux
@@ -130,4 +160,3 @@ EOF
   echo -e "\e[1;32m[+] Default shell changed successfully to $NEW_SHELL!\e[0m"
   echo -e "\e[1;33m[!] Restart Termux to apply changes.\e[0m"
 fi
-
