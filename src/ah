@@ -17,12 +17,16 @@ update_nu_alias() {
     local cmd="$2"
     local action="$3" # "add" or "remove"
 
-    if [ ! -f "$NU_CONFIG" ]; then return; fi
+    [ ! -d "$(dirname "$NU_CONFIG")" ] && mkdir -p "$(dirname "$NU_CONFIG")"
+    [ ! -f "$NU_CONFIG" ] && touch "$NU_CONFIG"
 
-    if [ "$action" == "add" ]; then
-        echo "alias $name = $cmd" >> "$NU_CONFIG"
-    else
-        sed -i "/alias $name = /d" "$NU_CONFIG"
+    # Remove existing alias to prevent duplicates
+    # Use | as sed delimiter to handle potential / in name
+    sed -i "\|^alias $name =|d" "$NU_CONFIG"
+
+    if [[ "$action" == "add" ]]; then
+        # Nushell aliases are best quoted
+        echo "alias $name = \"$cmd\"" >> "$NU_CONFIG"
     fi
 }
 
@@ -32,12 +36,15 @@ update_bash_alias() {
     local cmd="$2"
     local action="$3" # "add" or "remove"
 
-    if [ ! -f "$BASH_RC" ]; then return; fi
+    [ ! -f "$BASH_RC" ] && touch "$BASH_RC"
 
-    if [ "$action" == "add" ]; then
-        echo "alias $name='$cmd'" >> "$BASH_RC"
-    else
-        sed -i "/alias $name=/d" "$BASH_RC"
+    # Remove existing alias to prevent duplicates
+    sed -i "\|^alias $name=|d" "$BASH_RC"
+
+    if [[ "$action" == "add" ]]; then
+        # Escape single quotes for Bash: replace ' with '\''
+        local escaped_cmd="${cmd//\'/\'\\\'\'}"
+        echo "alias $name='$escaped_cmd'" >> "$BASH_RC"
     fi
 }
 
@@ -46,16 +53,25 @@ get_aliases() {
     # Bash aliases
     if [ -f "$BASH_RC" ]; then
         while IFS= read -r line; do
-            if [[ $line =~ ^alias[[:space:]]+([^=]+)=['\"](.+)['\"]$ ]]; then
-                ALIASES+=("${BASH_REMATCH[1]}	${BASH_REMATCH[2]}	Bash")
+            # Match alias name=value (value can be quoted or not)
+            if [[ "$line" =~ ^alias[[:space:]]+([^=]+)=\'?(.*)\'?$ ]]; then
+                local name="${BASH_REMATCH[1]}"
+                local cmd="${BASH_REMATCH[2]}"
+                # Strip trailing quote if it exists (the regex above might leave it if it started with one)
+                cmd="${cmd%\'}"
+                ALIASES+=("$name	$cmd	Bash")
             fi
         done < "$BASH_RC"
     fi
     # Nushell aliases
     if [ -f "$NU_CONFIG" ]; then
         while IFS= read -r line; do
-            if [[ $line =~ ^alias[[:space:]]+([^[:space:]]+)[[:space:]]*=[[:space:]]*(.+)$ ]]; then
-                ALIASES+=("${BASH_REMATCH[1]}	${BASH_REMATCH[2]}	Nushell")
+            # Match alias name = value
+            if [[ "$line" =~ ^alias[[:space:]]+([^[:space:]]+)[[:space:]]*=[[:space:]]*\"?(.*)\"?$ ]]; then
+                local name="${BASH_REMATCH[1]}"
+                local cmd="${BASH_REMATCH[2]}"
+                cmd="${cmd%\"}"
+                ALIASES+=("$name	$cmd	Nushell")
             fi
         done < "$NU_CONFIG"
     fi
@@ -68,11 +84,12 @@ while true; do
         "List Aliases")
             get_aliases
             if [ ${#ALIASES[@]} -eq 0 ]; then
-                echo "No aliases found."
+                gum format "### No aliases found."
             else
                 echo -e "Alias	Command	Shell" > /tmp/aliases.tsv
                 for a in "${ALIASES[@]}"; do echo -e "$a" >> /tmp/aliases.tsv; done
                 gum table < /tmp/aliases.tsv --border rounded --header.foreground 212
+                rm /tmp/aliases.tsv
             fi
             ;;
         "Add Alias")
@@ -88,12 +105,12 @@ while true; do
             if [[ "$SHELL_TYPE" == "Nushell" || "$SHELL_TYPE" == "Both" ]]; then
                 update_nu_alias "$NAME" "$COMMAND" "add"
             fi
-            echo "[+] Alias '$NAME' added."
+            gum format "### [+] Alias '$NAME' added successfully."
             ;;
         "Remove Alias")
             get_aliases
             if [ ${#ALIASES[@]} -eq 0 ]; then
-                echo "No aliases to remove."
+                gum format "### No aliases to remove."
                 continue
             fi
             TO_REMOVE=$(printf "%s\n" "${ALIASES[@]}" | gum choose --header "Select alias to remove:")
@@ -107,7 +124,7 @@ while true; do
             else
                 update_nu_alias "$NAME" "" "remove"
             fi
-            echo "[-] Alias '$NAME' removed from $STYPE."
+            gum format "### [-] Alias '$NAME' removed from $STYPE."
             ;;
         "Exit")
             break

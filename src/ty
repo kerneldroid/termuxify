@@ -17,6 +17,24 @@ call_gum() {
     command gum "$@"
 }
 
+# Marker-based configuration update function
+update_config() {
+    local file="$1"
+    local content="$2"
+    local start_marker="# --- TERMUXIFY START ---"
+    local end_marker="# --- TERMUXIFY END ---"
+    
+    touch "$file"
+    if grep -qF "$start_marker" "$file"; then
+        local tmp_file
+        tmp_file=$(mktemp)
+        sed "/$start_marker/,/$end_marker/d" "$file" > "$tmp_file"
+        cat "$tmp_file" > "$file"
+        rm "$tmp_file"
+    fi
+    printf "\n%s\n%s\n%s\n" "$start_marker" "$content" "$end_marker" >> "$file"
+}
+
 # Theme Definitions
 declare -A THEMES
 
@@ -66,7 +84,7 @@ if [ "$ACTION" = "Theme & Font Selection" ]; then
   FONT=$(call_gum choose "IBM Plex Mono" "Google Sans Code" "Ioskeley Mono" --header "Select Termux Font:")
 
   mkdir -p ~/.termux
-  echo -e "${THEMES[$THEME_NAME]}" > ~/.termux/colors.properties
+  printf "%b" "${THEMES[$THEME_NAME]}" > ~/.termux/colors.properties
 
   export SELECTED_FONT="$FONT"
   export REPO_URL_ENV="$REPO_URL"
@@ -91,23 +109,11 @@ if [ "$ACTION" = "Theme & Font Selection" ]; then
     termux-reload-settings
     clear
     command -v nerdfetch >/dev/null 2>&1 && nerdfetch || true
-    echo -e "\e[1;32m[+] Termuxify: Theme and Font applied successfully!\e[0m"
+    call_gum format "### [+] Termuxify: Theme and Font applied successfully!"
   else
     clear
-    echo -e "\e[1;31m[-] Error: Font download failed. Check your connection or GitHub access.\e[0m"
+    call_gum format "### [-] Error: Font download failed. Check your connection or GitHub access."
   fi
-
-# Safe .bashrc modification function
-update_bashrc() {
-    local content="$1"
-    local start_marker="# --- TERMUXIFY START ---"
-    local end_marker="# --- TERMUXIFY END ---"
-    
-    if grep -q "$start_marker" "$HOME/.bashrc"; then
-        sed -i "/$start_marker/,/$end_marker/d" "$HOME/.bashrc"
-    fi
-    echo -e "\n$start_marker\n$content\n$end_marker" >> "$HOME/.bashrc"
-}
 
 elif [ "$ACTION" = "Change Default Shell" ]; then
   NEW_SHELL=$(call_gum choose "Nushell" "Bash" "Zsh" "Fish" --header "Select Default Shell:")
@@ -116,47 +122,46 @@ elif [ "$ACTION" = "Change Default Shell" ]; then
     "Nushell")
       call_gum spin --spinner dot --title "Installing Nushell..." -- pkg install -y nushell
       mkdir -p "$HOME/.config/nushell"
-      cat << 'EOF' > "$HOME/.config/nushell/env.nu"
+      cat << 'EOF' > "$HOME/.config/nushell/termuxify_env.nu"
 $env.STARSHIP_SHELL = "nu"
 $env.STARSHIP_SESSION_KEY = (random chars -l 16)
 $env.ATUIN_SESSION = (atuin uuid)
 EOF
-      cat << 'EOF' > "$HOME/.config/nushell/config.nu"
+      cat << 'EOF' > "$HOME/.config/nushell/termuxify_config.nu"
 $env.config = { show_banner: false }
 source ~/.config/nushell/starship.nu
 nerdfetch
 EOF
       starship init nu | sed 's/--right//g' > "$HOME/.config/nushell/starship.nu"
-      update_bashrc "if [[ \$- == *i* ]] && [ -z \"\$NU_VERSION\" ]; then exec nu; fi"
+      
+      if ! grep -q "termuxify_env.nu" "$HOME/.config/nushell/env.nu" 2>/dev/null; then
+          echo "source ~/.config/nushell/termuxify_env.nu" >> "$HOME/.config/nushell/env.nu"
+      fi
+      if ! grep -q "termuxify_config.nu" "$HOME/.config/nushell/config.nu" 2>/dev/null; then
+          echo "source ~/.config/nushell/termuxify_config.nu" >> "$HOME/.config/nushell/config.nu"
+      fi
+      update_config "$HOME/.bashrc" "if [[ $- == *i* ]] && [ -z \"$NU_VERSION\" ]; then exec nu; fi"
       chsh -s nu || true
       ;;
     "Bash")
-      update_bashrc "eval \"\$(starship init bash)\"\neval \"\$(atuin init bash)\"\nnerdfetch"
+      update_config "$HOME/.bashrc" "eval \"\$(starship init bash)\"\neval \"\$(atuin init bash)\"\nnerdfetch"
       chsh -s bash || true
       ;;
     "Zsh")
       call_gum spin --spinner dot --title "Installing Zsh..." -- pkg install -y zsh
-      cat << 'EOF' > "$HOME/.zshrc"
-eval "$(starship init zsh)"
-eval "$(atuin init zsh)"
-nerdfetch
-EOF
-      update_bashrc "if [[ \$- == *i* ]] && [ -z \"\$ZSH_VERSION\" ]; then exec zsh; fi"
+      update_config "$HOME/.zshrc" "eval \"\$(starship init zsh)\"\neval \"\$(atuin init zsh)\"\nnerdfetch"
+      update_config "$HOME/.bashrc" "if [[ $- == *i* ]] && [ -z \"$ZSH_VERSION\" ]; then exec zsh; fi"
       chsh -s zsh || true
       ;;
     "Fish")
       call_gum spin --spinner dot --title "Installing Fish..." -- pkg install -y fish
       mkdir -p "$HOME/.config/fish"
-      cat << 'EOF' > "$HOME/.config/fish/config.fish"
-starship init fish | source
-atuin init fish | source
-nerdfetch
-EOF
-      update_bashrc "if [[ \$- == *i* ]] && [ -z \"\$FISH_VERSION\" ]; then exec fish; fi"
+      update_config "$HOME/.config/fish/config.fish" "starship init fish | source\natuin init fish | source\nnerdfetch"
+      update_config "$HOME/.bashrc" "if [[ $- == *i* ]] && [ -z \"$FISH_VERSION\" ]; then exec fish; fi"
       chsh -s fish || true
       ;;
   esac
 
-  echo -e "\e[1;32m[+] Default shell changed successfully to $NEW_SHELL!\e[0m"
-  echo -e "\e[1;33m[!] Restart Termux to apply changes.\e[0m"
+  call_gum format "### [+] Default shell changed successfully to $NEW_SHELL!"
+  call_gum format "### [!] Restart Termux to apply changes."
 fi

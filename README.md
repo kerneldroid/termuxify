@@ -1,38 +1,52 @@
 # Termuxify
 
-The ultimate automated setup, customization, and shell management suite for Termux.
+A powerful, aesthetic, and automated environment for Termux.
 
-Termuxify transforms a fresh Termux installation into a fully featured, optimized, and professional terminal environment in seconds.
+## Features
 
-## Installation
-
-Run the following command in your Termux:
-
-```bash
-pkg install git -y && git clone https://github.com/kerneldroid/termuxify && cd termuxify && bash setup.sh
-```
-
-## Key Features
-
-- **Selective Shell Setup**: Choose your primary shell at startup: Nushell (Recommended), Bash, Zsh, or Fish.
-- **Dynamic Shell Switcher**: Switch default shells anytime via the `ty` menu. It handles `pkg` installation, config generation, and hooks default entry redirectors seamlessly.
-- **Safe Configuration**: Uses marker blocks (`# --- TERMUXIFY START ---`) in `.bashrc` to ensure your personal settings are never overwritten.
-- **Python JIT Support**: Instantly activate the official experimental JIT in Python 3.13+ through environment variables.
-- **Optimized Font Mirroring**: Cuts network traffic by downloading only single, patched `.ttf` files instead of massive ZIP archives.
-- **Robust Uninstaller**: A reliable `dmg` tool that restores original configurations from backups with pre-flight safety checks.
-
-## Built-in Tools
-
-- `ty` : Theme, font, and shell management TUI.
-- `ah` : Interactive Alias Manager (Bash & Nushell support).
-- `tc` : Dev stack installer (Python 3.13 JIT, Numba, LuaJIT).
-- `tt` : Deep diagnostic check (Shizuku/Nightzuku & ADB module validation).
-- `dmg`: Safe system restoration and Termuxify removal.
+- **Hierarchical Theme Selection**: Choose from popular themes like Catppuccin, Kanagawa, Oxocarbon, Nord, Tokyo Night, and the perceptually optimized **Aethel**.
+- **Font Installer**: Automated installation of Nerd Fonts (IBM Plex Mono, Google Sans Code, Ioskeley Mono).
+- **Interactive Alias Manager (`ah`)**: Easily list, add, and remove aliases for Bash and Nushell.
+- **Development Stack Selector (`tc`)**: Quick setup for Python (with JIT), Node.js, Go, Rust, and Lua.
+- **Deep Integration**: Pre-configured Starship prompt, Atuin shell history, and NerdFetch.
+- **Root & Shizuku Diagnostics (`tt`)**: Comprehensive tests for root managers and Shizuku/Nightzuku APIs.
 
 ## Requirements
 
-- A fresh or existing Termux installation.
-- Internet connection for dependencies and fonts.
+- **Termux** (from F-Droid or GitHub recommended)
+- **Android 7.0+**
+- Active internet connection
 
----
-*Created by Kerneldroid*
+## Installation
+
+Run the following command in your Termux terminal:
+
+```bash
+pkg install git -y
+git clone https://github.com/kerneldroid/termuxify
+cd termuxify
+bash setup.sh
+```
+
+## Tools
+
+Once installed, you can access the following tools from anywhere:
+
+- `ty`: The main TUI for Theme & Font Selection.
+- `ah`: Alias Manager (Add/Remove shell shortcuts).
+- `tc`: Tech Stack Selector (Install development environments).
+- `tt`: Termux Toolbox (Diagnostics for Root/Shizuku).
+- `dmg`: Damage Control (Uninstaller & Backup restorer).
+- `nerdfetch`: A sleek system fetch script.
+
+## Shell Support
+
+Termuxify supports and can configure the following shells:
+- **Nushell** (Default/Recommended)
+- **Bash**
+- **Zsh**
+- **Fish**
+
+## License
+
+Standard Distribution License.

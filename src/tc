@@ -14,37 +14,54 @@ call_gum() {
 
 echo -e "\e[1;34m[*] Running TermuxCode (tc)...\e[0m"
 
+install_pkg() {
+    local pkg_name="$1"
+    local title="$2"
+    if ! call_gum spin --spinner dot --title "$title" -- pkg install -y "$pkg_name"; then
+        echo -e "\e[1;31m[-] Error: Failed to install $pkg_name.\e[0m"
+        return 1
+    fi
+    return 0
+}
+
 CHOICE=$(call_gum choose "Python 3.13 (Enable JIT)" "Python + Numba (JIT)" "Node.js (LTS)" "Go" "Rust" "Lua" "LuaJIT" --header "Select Development Stack:")
 
-call_gum spin --spinner dot --title "Updating package lists..." -- pkg update -y
+if ! call_gum spin --spinner dot --title "Updating package lists..." -- pkg update -y; then
+    echo -e "\e[1;31m[-] Error: Failed to update package lists.\e[0m"
+    exit 1
+fi
 
 case "$CHOICE" in
   "Python 3.13 (Enable JIT)")
-    call_gum spin --spinner dot --title "Installing Python 3.13..." -- pkg install -y python
-    if ! grep -q "PYTHON_JIT" "$HOME/.bashrc"; then
-        echo -e "\n# Termuxify: Enable Python 3.13 JIT\nexport PYTHON_JIT=1" >> "$HOME/.bashrc"
+    if install_pkg "python" "Installing Python 3.13..."; then
+        PYTHON_VER=$(python -V 2>&1 | cut -d' ' -f2)
+        echo -e "[*] Detected Python version: $PYTHON_VER"
+        if ! grep -q "PYTHON_JIT" "$HOME/.bashrc"; then
+            echo -e "\n# Termuxify: Enable Python 3.13 JIT\nexport PYTHON_JIT=1" >> "$HOME/.bashrc"
+        fi
+        [ -f "$HOME/.config/nushell/env.nu" ] && ! grep -q "PYTHON_JIT" "$HOME/.config/nushell/env.nu" && echo -e "\n\$env.PYTHON_JIT = '1'" >> "$HOME/.config/nushell/env.nu"
+        echo -e "\e[1;32m[+] Python 3.13 JIT enabled!\e[0m"
     fi
-    [ -f "$HOME/.config/nushell/env.nu" ] && ! grep -q "PYTHON_JIT" "$HOME/.config/nushell/env.nu" && echo -e "\n\$env.PYTHON_JIT = '1'" >> "$HOME/.config/nushell/env.nu"
-    echo -e "\e[1;32m[+] Python 3.13 JIT enabled!\e[0m"
     ;;
   "Python + Numba (JIT)")
-    call_gum spin --spinner dot --title "Setting up TUR repository..." -- pkg install -y tur-repo
-    call_gum spin --spinner dot --title "Installing Python and Numba..." -- pkg install -y python python-numba
+    if install_pkg "tur-repo" "Setting up TUR repository..."; then
+        install_pkg "python python-numba" "Installing Python and Numba..."
+    fi
     ;;
   "Node.js (LTS)")
-    call_gum spin --spinner dot --title "Installing Node.js..." -- pkg install -y nodejs
+    install_pkg "nodejs" "Installing Node.js..."
     ;;
   "Go")
-    call_gum spin --spinner dot --title "Installing Go..." -- pkg install -y golang
+    install_pkg "golang" "Installing Go..."
     ;;
   "Rust")
-    call_gum spin --spinner dot --title "Installing Rust..." -- pkg install -y rust
+    install_pkg "rust" "Installing Rust..."
     ;;
   "Lua")
-    call_gum spin --spinner dot --title "Installing Lua..." -- pkg install -y lua54
+    install_pkg "lua54" "Installing Lua..."
     ;;
   "LuaJIT")
-    call_gum spin --spinner dot --title "Installing LuaJIT..." -- pkg install -y luajit
+    install_pkg "luajit" "Installing LuaJIT..."
     ;;
 esac
 

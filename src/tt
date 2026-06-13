@@ -5,26 +5,30 @@ set -e
 echo -e "\e[1;34m[*] Running TermuxTest (tt)...\e[0m"
 
 echo -e "\n\e[1;33m[1] Testing Root Access & Manager...\e[0m"
-if su -c 'id' >/dev/null 2>&1; then
+if timeout 5 su -c 'id' >/dev/null 2>&1; then
     echo -e "\e[1;32m[+] Root access granted.\e[0m"
-    if su -c 'su -v | grep -i magisk' >/dev/null 2>&1; then
+    if timeout 2 su -c 'su -v | grep -i magisk' >/dev/null 2>&1; then
         echo -e "\e[1;32m[+] Root Manager: Magisk detected.\e[0m"
-    elif su -c 'ls -d /data/adb/ksu' >/dev/null 2>&1 || su -c 'which ksu' >/dev/null 2>&1; then
+    elif timeout 2 su -c 'ls -d /data/adb/ksu' >/dev/null 2>&1 || timeout 2 su -c 'which ksu' >/dev/null 2>&1; then
         echo -e "\e[1;32m[+] Root Manager: KernelSU detected.\e[0m"
-    elif su -c 'ls -d /data/adb/ap' >/dev/null 2>&1 || su -c 'ls -d /data/adb/apatch' >/dev/null 2>&1; then
+    elif timeout 2 su -c 'ls -d /data/adb/ap' >/dev/null 2>&1 || timeout 2 su -c 'ls -d /data/adb/apatch' >/dev/null 2>&1; then
         echo -e "\e[1;32m[+] Root Manager: APatch detected.\e[0m"
     else
         echo -e "\e[1;32m[+] Root Manager: Unknown (SuperSU/LineageSU).\e[0m"
     fi
 else
-    echo -e "\e[1;31m[-] No Root access available.\e[0m"
+    if [ $? -eq 124 ]; then
+        echo -e "\e[1;31m[-] Root access request TIMED OUT. Check your Root Manager for a pending prompt.\e[0m"
+    else
+        echo -e "\e[1;31m[-] No Root access available or permission denied.\e[0m"
+    fi
 fi
 
 echo -e "\n\e[1;33m[2] Testing Nightzuku / Shizuku API & Connectors...\e[0m"
 
 echo -e "[*] Querying Nightzuku Connector API..."
-NIGHT_OUT=$(content query --uri content://kerneldroid.nightzuku.connector 2>/dev/null || true)
-SHI_OUT=$(content query --uri content://moe.shizuku.privileged.api.connector 2>/dev/null || true)
+NIGHT_OUT=$(timeout 3 content query --uri content://kerneldroid.nightzuku.connector 2>/dev/null || true)
+SHI_OUT=$(timeout 3 content query --uri content://moe.shizuku.privileged.api.connector 2>/dev/null || true)
 
 PROVIDER_SUCCESS=false
 STARTUP_CMD=""

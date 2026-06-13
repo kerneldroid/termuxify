@@ -2,7 +2,8 @@
 
 set -e
 
-BACKUP_DIR="$HOME/.termuxify_backup"
+# Find the latest backup directory
+BACKUP_DIR=$(ls -td "$HOME"/.termuxify_backup* 2>/dev/null | head -n 1)
 
 call_gum() {
     if command -v gum >/dev/null 2>&1; then
@@ -14,11 +15,13 @@ call_gum() {
 
 echo -e "\e[1;34m[*] Termuxify Uninstaller\e[0m"
 
-if [ ! -d "$BACKUP_DIR" ]; then
-    echo -e "\e[1;31m[-] Error: Backup directory $BACKUP_DIR not found.\e[0m"
+if [ -z "$BACKUP_DIR" ] || [ ! -d "$BACKUP_DIR" ]; then
+    echo -e "\e[1;31m[-] Error: No Termuxify backup directory found in $HOME.\e[0m"
     echo -e "\e[1;33m[!] Cannot safely restore original configurations. Aborting.\e[0m"
     exit 1
 fi
+
+echo -e "\e[1;33m[*] Using backup found at: $BACKUP_DIR\e[0m"
 
 if command -v gum >/dev/null 2>&1; then
     if ! call_gum confirm "Are you sure you want to completely restore and remove Termuxify?"; then
@@ -35,50 +38,46 @@ fi
 
 echo -e "\e[1;34m[*] Reverting configurations...\e[0m"
 
-# Restore files/directories from backup
-restore_item() {
-    local item_path="$1"
-    local src="$BACKUP_DIR/$(basename "$item_path")"
-    local dest="$HOME/$item_path"
-
-    # For nested items like .config/nushell, we need to handle the structure
-    if [[ "$item_path" == */* ]]; then
-        src="$BACKUP_DIR/$(echo "$item_path" | sed 's/\//_/g')"
-    fi
-
-    if [ -e "$src" ]; then
-        rm -rf "$dest"
-        # Ensure parent directory exists
-        mkdir -p "$(dirname "$dest")"
-        cp -r "$src" "$dest"
-        echo -e "  \e[1;32m[+]\e[0m Restored: $item_path"
-    else
-        # If it's a known Termuxify file, remove it
-        if [ -e "$dest" ]; then
-            rm -rf "$dest"
-            echo -e "  \e[1;33m[-]\e[0m Removed (no backup): $item_path"
-        fi
-    fi
-}
-
-# Update backup logic in setup.sh to match this flattening if needed, 
-# but for now let's fix the restore to be aware of how setup.sh currently backs up.
-# Currently setup.sh does: cp -r "$cfg" "$BACKUP_DIR/"
-# This means ~/.config/nushell becomes $BACKUP_DIR/nushell
-
+# Restore files/directories from backup safely
 restore_simple() {
     local name="$1"
     local dest_path="$2"
     local src="$BACKUP_DIR/$name"
     
     if [ -e "$src" ]; then
-        rm -rf "$dest_path"
+        # Backup exists, try to restore it
+        if [ -e "$dest_path" ]; then
+            mv "$dest_path" "${dest_path}.bak_uninstall"
+        fi
+        
         mkdir -p "$(dirname "$dest_path")"
-        cp -r "$src" "$dest_path"
-        echo -e "  \e[1;32m[+]\e[0m Restored: $dest_path"
+        if cp -r "$src" "$dest_path"; then
+            rm -rf "${dest_path}.bak_uninstall"
+            echo -e "  \e[1;32m[+]\e[0m Restored: $dest_path"
+        else
+            echo -e "  \e[1;31m[-] Error: Failed to restore $dest_path from backup.\e[0m"
+            if [ -e "${dest_path}.bak_uninstall" ]; then
+                mv "${dest_path}.bak_uninstall" "$dest_path"
+                echo -e "  \e[1;33m[!]\e[0m Reverted to current version of $dest_path."
+            fi
+        fi
     else
-        rm -rf "$dest_path"
-        echo -e "  \e[1;33m[-]\e[0m Removed: $dest_path"
+        # Backup missing, only remove if it contains Termuxify markers or is a known artifact
+        if [ -e "$dest_path" ]; then
+            local should_remove=false
+            if [[ "$name" == "nushell" || "$name" == "fish" || "$name" == "starship.toml" ]]; then
+                should_remove=true
+            elif [ -f "$dest_path" ] && grep -q "TERMUXIFY" "$dest_path"; then
+                should_remove=true
+            fi
+
+            if [ "$should_remove" = true ]; then
+                rm -rf "$dest_path"
+                echo -e "  \e[1;33m[-]\e[0m Removed Termuxify artifact (no backup found): $dest_path"
+            else
+                echo -e "  \e[1;33m[?]\e[0m Keeping existing $dest_path (no backup and no Termuxify markers found)."
+            fi
+        fi
     fi
 }
 
