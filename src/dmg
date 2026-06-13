@@ -2,7 +2,6 @@
 
 set -e
 
-# Find the latest backup directory
 BACKUP_DIR=$(ls -td "$HOME"/.termuxify_backup* 2>/dev/null | head -n 1)
 
 call_gum() {
@@ -38,14 +37,12 @@ fi
 
 echo -e "\e[1;34m[*] Reverting configurations...\e[0m"
 
-# Restore files/directories from backup safely
 restore_simple() {
     local name="$1"
     local dest_path="$2"
     local src="$BACKUP_DIR/$name"
     
     if [ -e "$src" ]; then
-        # Backup exists, try to restore it
         if [ -e "$dest_path" ]; then
             mv "$dest_path" "${dest_path}.bak_uninstall"
         fi
@@ -62,7 +59,6 @@ restore_simple() {
             fi
         fi
     else
-        # Backup missing, only remove if it contains Termuxify markers or is a known artifact
         if [ -e "$dest_path" ]; then
             local should_remove=false
             if [[ "$name" == "nushell" || "$name" == "fish" || "$name" == "starship.toml" ]]; then
@@ -88,12 +84,10 @@ restore_simple "nushell" "$HOME/.config/nushell"
 restore_simple "fish" "$HOME/.config/fish"
 restore_simple "starship.toml" "$HOME/.config/starship.toml"
 
-# Cleanup markers in .bashrc if it was not fully restored
 if [ -f "$HOME/.bashrc" ]; then
     sed -i '/# --- TERMUXIFY START ---/,/# --- TERMUXIFY END ---/d' "$HOME/.bashrc"
 fi
 
-# Cleanup artifacts
 rm -rf "$HOME/.cache/starship" "$BACKUP_DIR"
 
 echo -e "\e[1;34m[*] Removing binaries...\e[0m"

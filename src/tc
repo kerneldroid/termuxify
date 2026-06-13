@@ -1,19 +1,14 @@
 #!/usr/bin/env bash
-
 set -e
-
 if ! command -v gum >/dev/null 2>&1; then
     echo -e "\e[1;31m[-] Error: Required dependency 'gum' is not installed.\e[0m"
     echo -e "\e[1;33m[!] Please run setup.sh first.\e[0m"
     exit 1
 fi
-
 call_gum() {
     command gum "$@"
 }
-
 echo -e "\e[1;34m[*] Running TermuxCode (tc)...\e[0m"
-
 install_pkg() {
     local pkg_name="$1"
     local title="$2"
@@ -23,14 +18,11 @@ install_pkg() {
     fi
     return 0
 }
-
 CHOICE=$(call_gum choose "Python 3.13 (Enable JIT)" "Python + Numba (JIT)" "Node.js (LTS)" "Go" "Rust" "Lua" "LuaJIT" --header "Select Development Stack:")
-
 if ! call_gum spin --spinner dot --title "Updating package lists..." -- pkg update -y; then
     echo -e "\e[1;31m[-] Error: Failed to update package lists.\e[0m"
     exit 1
 fi
-
 case "$CHOICE" in
   "Python 3.13 (Enable JIT)")
     if install_pkg "python" "Installing Python 3.13..."; then
@@ -64,5 +56,4 @@ case "$CHOICE" in
     install_pkg "luajit" "Installing LuaJIT..."
     ;;
 esac
-
 echo -e "\e[1;32m[+] Development stack configured successfully!\e[0m"

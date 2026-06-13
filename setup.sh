@@ -2,7 +2,6 @@
 
 set -e
 
-# Configuration
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 BACKUP_DIR="$HOME/.termuxify_backup_$TIMESTAMP"
 BIN_DIR="${PREFIX}/bin"
@@ -10,7 +9,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPTS="ty tt ah tc dmg"
 SHARED_PACKAGES="starship atuin wget curl git unzip tsu ncurses-utils gum"
 
-# Ensure we are in Termux
 if [ -z "$PREFIX" ]; then
     echo -e "\e[1;31m[!] Error: This script must be run within Termux.\e[0m"
     exit 1
@@ -52,7 +50,6 @@ if [ "$INSTALL_MODE" == "update" ]; then
     exit 0
 fi
 
-# Shell selection
 echo -e "\n\e[1;34m[*] Select primary shell:\e[0m"
 echo -e "  \e[1;32m1)\e[0m Nushell (Recommended)"
 echo -e "  \e[1;32m2)\e[0m Bash"
@@ -79,7 +76,6 @@ case "$SELECTED_SHELL" in
     "fish") pkg install -y fish ;;
 esac
 
-# Backup logic
 echo -e "\e[1;33m[*] Creating configuration backup at $BACKUP_DIR...\e[0m"
 mkdir -p "$BACKUP_DIR"
 for cfg in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.termux" "$HOME/.config/nushell" "$HOME/.config/fish" "$HOME/.config/starship.toml"; do
@@ -88,7 +84,6 @@ for cfg in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.termux" "$HOME/.config/nushell
     fi
 done
 
-# Install scripts
 echo -e "\e[1;33m[*] Deploying binaries to $BIN_DIR...\e[0m"
 mkdir -p "$BIN_DIR"
 for script in $SCRIPTS; do
@@ -98,15 +93,12 @@ for script in $SCRIPTS; do
     fi
 done
 
-# NerdFetch
 echo -e "\e[1;33m[*] Installing NerdFetch...\e[0m"
 wget -qO "$BIN_DIR/nerdfetch" "https://raw.githubusercontent.com/ThatOneCalculator/NerdFetch/main/nerdfetch" || echo -e "\e[1;31m[!] Failed to download NerdFetch\e[0m"
 [ -f "$BIN_DIR/nerdfetch" ] && chmod +x "$BIN_DIR/nerdfetch"
 
-# Shell configuration
 echo -e "\e[1;33m[*] Configuring $SELECTED_SHELL environment...\e[0m"
 
-# Marker-based configuration update function
 update_config() {
     local file="$1"
     local content="$2"
@@ -123,7 +115,6 @@ update_config() {
 case "$SELECTED_SHELL" in
     "nu")
         mkdir -p "$HOME/.config/nushell"
-        # Nushell is a bit different, we'll write separate files and source them if not already sourced
         cat << 'EOF' > "$HOME/.config/nushell/termuxify_env.nu"
 $env.STARSHIP_SHELL = "nu"
 $env.STARSHIP_SESSION_KEY = (random chars -l 16)
@@ -136,7 +127,6 @@ nerdfetch
 EOF
         starship init nu | sed 's/--right//g' > "$HOME/.config/nushell/starship.nu"
         
-        # Inject sourcing into main config files
         if ! grep -q "termuxify_env.nu" "$HOME/.config/nushell/env.nu" 2>/dev/null; then
             echo "source ~/.config/nushell/termuxify_env.nu" >> "$HOME/.config/nushell/env.nu"
         fi
@@ -163,7 +153,6 @@ esac
 echo -e "\e[1;32m[+] Termuxify installation complete!\e[0m"
 
 echo -e "\e[1;32m[+] Starting the TUI (ty) for initial setup...\e[0m"
-# Use the installed ty script
 if [ -f "$BIN_DIR/ty" ]; then
     "$BIN_DIR/ty"
 else
