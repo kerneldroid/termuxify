@@ -105,7 +105,8 @@ Termuxify supports and can configure the following shells:
 - [Nord](https://github.com/nordtheme/nord) — Arctic, north-bluish color palette.
 - [Catppuccin](https://github.com/catppuccin/catppuccin) — Soothing pastel theme.
 - [Kanagawa](https://github.com/rebelot/kanagawa.nvim) — Dark theme inspired by Kanagawa wave.
-- [Gruvbox](https://github.com/morhetz/gruvbox) — Retro groove color scheme.
+- [Gruvbox](https://github.com/morhetz/gruvbox) — Retro groove color scheme (6 variants: dark hard/medium/soft, light hard/medium/soft).
+- [Gruvbox Material](https://github.com/sainnhe/gruvbox-material) — Gruvbox with Material Design palette by sainnhe (6 variants: dark hard/medium/soft, light hard/medium/soft).
 - [Oxocarbon](https://github.com/nyoom-engineering/oxocarbon.nvim) — Carbon-inspired color palette.
 
 ## License

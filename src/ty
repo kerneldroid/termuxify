@@ -35,8 +35,19 @@ update_config() {
 
 declare -A THEMES
 
-THEMES["Gruvbox"]="background=#282828\nforeground=#ebdbb2\ncursor=#ebdbb2\ncolor0=#282828\ncolor1=#cc241d\ncolor2=#98971a\ncolor3=#d79921\ncolor4=#458588\ncolor5=#b16286\ncolor6=#689d6a\ncolor7=#a89984\ncolor8=#928374\ncolor9=#fb4934\ncolor10=#b8bb26\ncolor11=#fabd2f\ncolor12=#83a598\ncolor13=#d3869b\ncolor14=#8ec07c\ncolor15=#ebdbb2"
-THEMES["Gruvbox Material"]="background=#1d2021\nforeground=#d4be98\ncursor=#d4be98\ncolor0=#32302f\ncolor1=#ea6962\ncolor2=#a9b665\ncolor3=#d8a657\ncolor4=#7daea3\ncolor5=#d3869b\ncolor6=#89b482\ncolor7=#d4be98\ncolor8=#32302f\ncolor9=#ea6962\ncolor10=#a9b665\ncolor11=#d8a657\ncolor12=#7daea3\ncolor13=#d3869b\ncolor14=#89b482\ncolor15=#d4be98"
+THEMES["Gruvbox Dark Hard"]="background=#1d2021\nforeground=#ebdbb2\ncursor=#ebdbb2\ncolor0=#1d2021\ncolor1=#cc241d\ncolor2=#98971a\ncolor3=#d79921\ncolor4=#458588\ncolor5=#b16286\ncolor6=#689d6a\ncolor7=#a89984\ncolor8=#928374\ncolor9=#fb4934\ncolor10=#b8bb26\ncolor11=#fabd2f\ncolor12=#83a598\ncolor13=#d3869b\ncolor14=#8ec07c\ncolor15=#ebdbb2"
+THEMES["Gruvbox Dark"]="background=#282828\nforeground=#ebdbb2\ncursor=#ebdbb2\ncolor0=#282828\ncolor1=#cc241d\ncolor2=#98971a\ncolor3=#d79921\ncolor4=#458588\ncolor5=#b16286\ncolor6=#689d6a\ncolor7=#a89984\ncolor8=#928374\ncolor9=#fb4934\ncolor10=#b8bb26\ncolor11=#fabd2f\ncolor12=#83a598\ncolor13=#d3869b\ncolor14=#8ec07c\ncolor15=#ebdbb2"
+THEMES["Gruvbox Dark Soft"]="background=#32302f\nforeground=#ebdbb2\ncursor=#ebdbb2\ncolor0=#32302f\ncolor1=#cc241d\ncolor2=#98971a\ncolor3=#d79921\ncolor4=#458588\ncolor5=#b16286\ncolor6=#689d6a\ncolor7=#a89984\ncolor8=#928374\ncolor9=#fb4934\ncolor10=#b8bb26\ncolor11=#fabd2f\ncolor12=#83a598\ncolor13=#d3869b\ncolor14=#8ec07c\ncolor15=#ebdbb2"
+THEMES["Gruvbox Light Hard"]="background=#f9f5d7\nforeground=#3c3836\ncursor=#3c3836\ncolor0=#f9f5d7\ncolor1=#9d0006\ncolor2=#79740e\ncolor3=#b57614\ncolor4=#076678\ncolor5=#8f3f71\ncolor6=#427b58\ncolor7=#7c6f64\ncolor8=#928374\ncolor9=#fb4934\ncolor10=#b8bb26\ncolor11=#fabd2f\ncolor12=#83a598\ncolor13=#d3869b\ncolor14=#8ec07c\ncolor15=#3c3836"
+THEMES["Gruvbox Light"]="background=#fbf1c7\nforeground=#3c3836\ncursor=#3c3836\ncolor0=#fbf1c7\ncolor1=#9d0006\ncolor2=#79740e\ncolor3=#b57614\ncolor4=#076678\ncolor5=#8f3f71\ncolor6=#427b58\ncolor7=#7c6f64\ncolor8=#928374\ncolor9=#fb4934\ncolor10=#b8bb26\ncolor11=#fabd2f\ncolor12=#83a598\ncolor13=#d3869b\ncolor14=#8ec07c\ncolor15=#3c3836"
+THEMES["Gruvbox Light Soft"]="background=#f2e5bc\nforeground=#3c3836\ncursor=#3c3836\ncolor0=#f2e5bc\ncolor1=#9d0006\ncolor2=#79740e\ncolor3=#b57614\ncolor4=#076678\ncolor5=#8f3f71\ncolor6=#427b58\ncolor7=#7c6f64\ncolor8=#928374\ncolor9=#fb4934\ncolor10=#b8bb26\ncolor11=#fabd2f\ncolor12=#83a598\ncolor13=#d3869b\ncolor14=#8ec07c\ncolor15=#3c3836"
+
+THEMES["Gruvbox Material Dark Hard"]="background=#1d2021\nforeground=#d4be98\ncursor=#d4be98\ncolor0=#1d2021\ncolor1=#ea6962\ncolor2=#a9b665\ncolor3=#d8a657\ncolor4=#7daea3\ncolor5=#d3869b\ncolor6=#89b482\ncolor7=#d4be98\ncolor8=#7c6f64\ncolor9=#ea6962\ncolor10=#a9b665\ncolor11=#d8a657\ncolor12=#7daea3\ncolor13=#d3869b\ncolor14=#89b482\ncolor15=#d4be98"
+THEMES["Gruvbox Material Dark"]="background=#282828\nforeground=#d4be98\ncursor=#d4be98\ncolor0=#282828\ncolor1=#ea6962\ncolor2=#a9b665\ncolor3=#d8a657\ncolor4=#7daea3\ncolor5=#d3869b\ncolor6=#89b482\ncolor7=#d4be98\ncolor8=#7c6f64\ncolor9=#ea6962\ncolor10=#a9b665\ncolor11=#d8a657\ncolor12=#7daea3\ncolor13=#d3869b\ncolor14=#89b482\ncolor15=#d4be98"
+THEMES["Gruvbox Material Dark Soft"]="background=#32302f\nforeground=#d4be98\ncursor=#d4be98\ncolor0=#32302f\ncolor1=#ea6962\ncolor2=#a9b665\ncolor3=#d8a657\ncolor4=#7daea3\ncolor5=#d3869b\ncolor6=#89b482\ncolor7=#d4be98\ncolor8=#7c6f64\ncolor9=#ea6962\ncolor10=#a9b665\ncolor11=#d8a657\ncolor12=#7daea3\ncolor13=#d3869b\ncolor14=#89b482\ncolor15=#d4be98"
+THEMES["Gruvbox Material Light Hard"]="background=#f9f5d7\nforeground=#654735\ncursor=#654735\ncolor0=#f9f5d7\ncolor1=#c14a4a\ncolor2=#6c782e\ncolor3=#b47109\ncolor4=#45707a\ncolor5=#945e80\ncolor6=#4c7a5d\ncolor7=#654735\ncolor8=#a89984\ncolor9=#c14a4a\ncolor10=#6c782e\ncolor11=#b47109\ncolor12=#45707a\ncolor13=#945e80\ncolor14=#4c7a5d\ncolor15=#654735"
+THEMES["Gruvbox Material Light"]="background=#fbf1c7\nforeground=#654735\ncursor=#654735\ncolor0=#fbf1c7\ncolor1=#c14a4a\ncolor2=#6c782e\ncolor3=#b47109\ncolor4=#45707a\ncolor5=#945e80\ncolor6=#4c7a5d\ncolor7=#654735\ncolor8=#a89984\ncolor9=#c14a4a\ncolor10=#6c782e\ncolor11=#b47109\ncolor12=#45707a\ncolor13=#945e80\ncolor14=#4c7a5d\ncolor15=#654735"
+THEMES["Gruvbox Material Light Soft"]="background=#f2e5bc\nforeground=#654735\ncursor=#654735\ncolor0=#f2e5bc\ncolor1=#c14a4a\ncolor2=#6c782e\ncolor3=#b47109\ncolor4=#45707a\ncolor5=#945e80\ncolor6=#4c7a5d\ncolor7=#654735\ncolor8=#a89984\ncolor9=#c14a4a\ncolor10=#6c782e\ncolor11=#b47109\ncolor12=#45707a\ncolor13=#945e80\ncolor14=#4c7a5d\ncolor15=#654735"
 THEMES["Everforest Dark Hard"]="background=#272e33\nforeground=#d3c6aa\ncursor=#a7c080\ncolor0=#272e33\ncolor1=#e67e80\ncolor2=#a7c080\ncolor3=#dbbc7f\ncolor4=#7fbbb3\ncolor5=#d699b6\ncolor6=#83c092\ncolor7=#d3c6aa\ncolor8=#475258\ncolor9=#e67e80\ncolor10=#a7c080\ncolor11=#dbbc7f\ncolor12=#7fbbb3\ncolor13=#d699b6\ncolor14=#83c092\ncolor15=#d3c6aa"
 THEMES["Everforest Dark Medium"]="background=#2d353b\nforeground=#d3c6aa\ncursor=#a7c080\ncolor0=#2d353b\ncolor1=#e67e80\ncolor2=#a7c080\ncolor3=#dbbc7f\ncolor4=#7fbbb3\ncolor5=#d699b6\ncolor6=#83c092\ncolor7=#d3c6aa\ncolor8=#475258\ncolor9=#e67e80\ncolor10=#a7c080\ncolor11=#dbbc7f\ncolor12=#7fbbb3\ncolor13=#d699b6\ncolor14=#83c092\ncolor15=#d3c6aa"
 THEMES["Everforest Dark Soft"]="background=#333c43\nforeground=#d3c6aa\ncursor=#a7c080\ncolor0=#333c43\ncolor1=#e67e80\ncolor2=#a7c080\ncolor3=#dbbc7f\ncolor4=#7fbbb3\ncolor5=#d699b6\ncolor6=#83c092\ncolor7=#d3c6aa\ncolor8=#475258\ncolor9=#e67e80\ncolor10=#a7c080\ncolor11=#dbbc7f\ncolor12=#7fbbb3\ncolor13=#d699b6\ncolor14=#83c092\ncolor15=#d3c6aa"
@@ -229,7 +240,7 @@ print('\\\\n'.join(lines))
 ACTION=$(call_gum choose "Theme & Font Selection" "Change Default Shell" --header "Termuxify Menu:")
 
 if [ "$ACTION" = "Theme & Font Selection" ]; then
-  CATEGORY=$(call_gum choose "Thundra" "Material Color" "Tokyo Night" "Everforest" "OkColors" "Aethel" "Catppuccin" "Kanagawa" "Oxocarbon" "Gruvbox" "Nord" --header "Select Theme Category:")
+  CATEGORY=$(call_gum choose "Thundra" "Material Color" "Tokyo Night" "Everforest" "OkColors" "Aethel" "Catppuccin" "Kanagawa" "Oxocarbon" "Gruvbox" "Gruvbox Material" "Nord" --header "Select Theme Category:")
   
   case "$CATEGORY" in
     "Thundra") THEME_NAME=$(call_gum choose "Thundra Dark Hard" "Thundra Dark Normal" "Thundra Dark Soft" "Thundra Light Hard" "Thundra Light Normal" "Thundra Light Soft") ;;
@@ -244,7 +255,8 @@ if [ "$ACTION" = "Theme & Font Selection" ]; then
     "Catppuccin") THEME_NAME=$(call_gum choose "Catppuccin Mocha" "Catppuccin Macchiato" "Catppuccin Frappe" "Catppuccin Latte") ;;
     "Kanagawa") THEME_NAME=$(call_gum choose "Kanagawa Wave" "Kanagawa Dragon" "Kanagawa Lotus") ;;
     "Oxocarbon") THEME_NAME=$(call_gum choose "Oxocarbon Dark" "Oxocarbon Light") ;;
-    "Gruvbox") THEME_NAME=$(call_gum choose "Gruvbox" "Gruvbox Material") ;;
+    "Gruvbox") THEME_NAME=$(call_gum choose "Gruvbox Dark Hard" "Gruvbox Dark" "Gruvbox Dark Soft" "Gruvbox Light Hard" "Gruvbox Light" "Gruvbox Light Soft") ;;
+    "Gruvbox Material") THEME_NAME=$(call_gum choose "Gruvbox Material Dark Hard" "Gruvbox Material Dark" "Gruvbox Material Dark Soft" "Gruvbox Material Light Hard" "Gruvbox Material Light" "Gruvbox Material Light Soft") ;;
     "Nord") THEME_NAME="Nord" ;;
     *) THEME_NAME="$CATEGORY" ;;
   esac

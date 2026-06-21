@@ -47,6 +47,8 @@ check_access() {
 
 bypass_coloros() {
     if [ "$HAS_ROOT" = true ]; then
+        su -c 'settings delete secure sysui_type_accent_color' 2>/dev/null
+        su -c 'settings put secure qs_tile_colorful_config 0' 2>/dev/null
         su -c 'settings put system is_system_color_follow_static_wallpaper false' 2>/dev/null
         su -c 'settings put system oplus_customize_color_mode 1' 2>/dev/null
     fi
