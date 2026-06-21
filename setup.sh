@@ -6,7 +6,7 @@ TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 BACKUP_DIR="$HOME/.termuxify_backup_$TIMESTAMP"
 BIN_DIR="${PREFIX}/bin"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SCRIPTS="ty tt ah tc dmg"
+SCRIPTS="ty tt ah tc dmg mc"
 SHARED_PACKAGES="starship atuin wget curl git unzip tsu ncurses-utils gum"
 
 if [ -z "$PREFIX" ]; then
@@ -92,6 +92,12 @@ for script in $SCRIPTS; do
         chmod +x "$BIN_DIR/$script"
     fi
 done
+
+echo -e "\e[1;33m[*] Installing Material Color templates...\e[0m"
+mkdir -p "${PREFIX}/share/termuxify/templates"
+if [ -d "$SCRIPT_DIR/templates" ]; then
+    cp "$SCRIPT_DIR/templates/"*.mc "${PREFIX}/share/termuxify/templates/" 2>/dev/null || true
+fi
 
 echo -e "\e[1;33m[*] Installing NerdFetch...\e[0m"
 wget -qO "$BIN_DIR/nerdfetch" "https://raw.githubusercontent.com/ThatOneCalculator/NerdFetch/main/nerdfetch" || echo -e "\e[1;31m[!] Failed to download NerdFetch\e[0m"

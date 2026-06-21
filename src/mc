@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TEMPLATES_DIR="${SCRIPT_DIR}/../templates"
+[ -d "$TEMPLATES_DIR" ] || TEMPLATES_DIR="${PREFIX}/share/termuxify/templates"
+[ -d "$TEMPLATES_DIR" ] || TEMPLATES_DIR="${SCRIPT_DIR}/../share/termuxify/templates"
+
+for dep in gum python3; do
+    if ! command -v "$dep" >/dev/null 2>&1; then
+        echo -e "\e[1;31m[-] Error: Required dependency '$dep' is not installed.\e[0m"
+        exit 1
+    fi
+done
+
+call_gum() {
+    command gum "$@"
+}
+
+check_access() {
+    if command -v su >/dev/null 2>&1 && su -c id >/dev/null 2>&1; then
+        return 0
+    fi
+    echo -e "\e[1;31m[-] Error: Root access required to modify system colors.\e[0m"
+    echo -e "\e[1;33m[!] Material Color requires root or Shizuku.\e[0m"
+    exit 1
+}
+
+parse_mc_file() {
+    local file="$1"
+    local seed="" style="TONAL_SPOT" source="home_wallpaper" name=""
+
+    while IFS='=' read -r key value; do
+        key=$(echo "$key" | tr -d '[:space:]')
+        value=$(echo "$value" | tr -d '[:space:]')
+        case "$key" in
+            name) name="$value" ;;
+            seed) seed="$value" ;;
+            style) style="$value" ;;
+            source) source="$value" ;;
+        esac
+    done < "$file"
+
+    if [ -z "$seed" ]; then
+        echo -e "\e[1;31m[-] Error: No seed color found in $file\e[0m"
+        exit 1
+    fi
+
+    echo "$seed|$style|$source|$name"
+}
+
+apply_mc() {
+    local seed="$1"
+    local style="$2"
+    local source="$3"
+    local name="$4"
+
+    local seed_hex
+    seed_hex=$(echo "$seed" | sed 's/#//')
+
+    local json
+    json=$(python3 -c "
+import json
+data = {
+    'android.theme.customization.system_palette': 'FF${seed_hex}',
+    'android.theme.customization.color_source': '${source}',
+    'android.theme.customization.color_index': 0,
+    'android.theme.customization.theme_style': '${style}'
+}
+print(json.dumps(data))
+")
+
+    su -c "settings put secure theme_customization_overlay_packages '${json}'" 2>/dev/null
+
+    if [ -n "$name" ]; then
+        call_gum format "### [+] Applied: $name"
+    fi
+    call_gum format "### [+] Seed: $seed | Style: $style"
+    call_gum format "### [!] System UI will update shortly."
+}
+
+list_templates() {
+    if [ ! -d "$TEMPLATES_DIR" ]; then
+        echo -e "\e[1;33m[-] No templates directory found.\e[0m"
+        return 1
+    fi
+
+    echo -e "\e[1;34m[*] Available .mc templates:\e[0m"
+    for f in "$TEMPLATES_DIR"/*.mc; do
+        [ -f "$f" ] || continue
+        local tname tseed tstyle
+        tname=$(grep '^name=' "$f" | cut -d= -f2)
+        tseed=$(grep '^seed=' "$f" | cut -d= -f2)
+        tstyle=$(grep '^style=' "$f" | cut -d= -f2)
+        echo -e "  \e[1;32m$(basename "$f" .mc)\e[0m — $tname ($tseed, $tstyle)"
+    done
+}
+
+ACTION=$(call_gum choose "Apply .mc File" "List Templates" --header "Material Color Manager:")
+
+if [ "$ACTION" = "Apply .mc File" ]; then
+    check_access
+
+    MC_FILE=""
+
+    if [ -d "$TEMPLATES_DIR" ] && ls "$TEMPLATES_DIR"/*.mc >/dev/null 2>&1; then
+        TEMPLATE=$(call_gum choose "From Template" "Custom Path" --header "Select .mc Source:")
+        if [ "$TEMPLATE" = "From Template" ]; then
+            TEMPLATE_LIST=()
+            for f in "$TEMPLATES_DIR"/*.mc; do
+                [ -f "$f" ] || continue
+                TEMPLATE_LIST+=("$(basename "$f" .mc)")
+            done
+            SELECTED=$(call_gum choose "${TEMPLATE_LIST[@]}" --header "Select Template:")
+            MC_FILE="$TEMPLATES_DIR/${SELECTED}.mc"
+        else
+            MC_FILE=$(call_gum input --placeholder "Path to .mc file")
+        fi
+    else
+        MC_FILE=$(call_gum input --placeholder "Path to .mc file")
+    fi
+
+    if [ -z "$MC_FILE" ] || [ ! -f "$MC_FILE" ]; then
+        echo -e "\e[1;31m[-] Error: File not found: $MC_FILE\e[0m"
+        exit 1
+    fi
+
+    IFS='|' read -r seed style source name <<< "$(parse_mc_file "$MC_FILE")"
+    apply_mc "$seed" "$style" "$source" "$name"
+
+elif [ "$ACTION" = "List Templates" ]; then
+    list_templates
+fi

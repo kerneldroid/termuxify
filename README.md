@@ -50,11 +50,42 @@ bash setup.sh
 Once installed, you can access the following tools from anywhere:
 
 - `ty`: The main TUI for Theme & Font Selection.
+- `mc`: Material Color Manager — apply .mc color schemes to Android system UI (requires root).
 - `ah`: Alias Manager (Add/Remove shell shortcuts).
 - `tc`: Tech Stack Selector (Install development environments).
 - `tt`: Termux Toolbox (Diagnostics for Root/Shizuku).
 - `dmg`: Damage Control (Uninstaller & Backup restorer).
 - `nerdfetch`: A sleek system fetch script.
+
+## Material Color Manager
+
+The `mc` command lets you apply Material You color schemes to your Android system UI, matching your Termux theme.
+
+### .mc File Format
+
+```ini
+name=Everforest Dark
+seed=#A7C080
+style=TONAL_SPOT
+source=home_wallpaper
+```
+
+| Key | Description | Values |
+|-----|-------------|--------|
+| `name` | Display name | Any text |
+| `seed` | Hex color for palette generation | `#RRGGBB` |
+| `style` | Material You style | `TONAL_SPOT`, `VIBRANT`, `EXPRESSIVE`, `SPRITZ`, `RAINBOW`, `FRUIT_SALAD` |
+| `source` | Color source | `home_wallpaper`, `lock_wallpaper`, `preset` |
+
+### Built-in Templates
+
+44 templates included — one for every Termux theme variant. Run `mc` → "List Templates" to see all.
+
+### Usage
+
+```bash
+mc    # Interactive menu: Apply .mc file or List Templates
+```
 
 ## Shell Support
 

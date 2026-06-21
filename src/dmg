@@ -91,7 +91,7 @@ fi
 rm -rf "$HOME/.cache/starship" "$BACKUP_DIR"
 
 echo -e "\e[1;34m[*] Removing binaries...\e[0m"
-for bin in ty tt ah tc dmg nerdfetch; do
+for bin in ty tt ah tc dmg mc nerdfetch; do
     rm -f "${PREFIX}/bin/$bin"
 done
 
