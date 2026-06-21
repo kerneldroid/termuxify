@@ -18,13 +18,42 @@ call_gum() {
     command gum "$@"
 }
 
-check_access() {
+HAS_ROOT=false
+HAS_SHIZUKU=false
+
+detect_access() {
     if command -v su >/dev/null 2>&1 && su -c id >/dev/null 2>&1; then
+        HAS_ROOT=true
+    fi
+    if command -v rish >/dev/null 2>&1; then
+        HAS_SHIZUKU=true
+    fi
+}
+
+check_access() {
+    detect_access
+    if [ "$HAS_ROOT" = true ] || [ "$HAS_SHIZUKU" = true ]; then
         return 0
     fi
-    echo -e "\e[1;31m[-] Error: Root access required to modify system colors.\e[0m"
-    echo -e "\e[1;33m[!] Material Color requires root or Shizuku.\e[0m"
+    echo -e "\e[1;31m[-] Error: No root or Shizuku access found.\e[0m"
+    echo -e "\e[1;33m[!] Install Magisk/KernelSU for root, or Nightzuku/Shizuku for ADB access.\e[0m"
     exit 1
+}
+
+settings_put() {
+    local key="$1"
+    local value="$2"
+
+    if [ "$HAS_ROOT" = true ]; then
+        su -c "settings put secure ${key} '${value}'" 2>/dev/null && return 0
+    fi
+
+    if [ "$HAS_SHIZUKU" = true ]; then
+        rish -c "settings put secure ${key} '${value}'" 2>/dev/null && return 0
+    fi
+
+    echo -e "\e[1;31m[-] Failed to write settings. Check root/Shizuku access.\e[0m"
+    return 1
 }
 
 parse_mc_file() {
@@ -71,12 +100,15 @@ data = {
 print(json.dumps(data))
 ")
 
-    su -c "settings put secure theme_customization_overlay_packages '${json}'" 2>/dev/null
+    settings_put "theme_customization_overlay_packages" "$json"
+
+    local method="root"
+    [ "$HAS_ROOT" = false ] && method="Shizuku"
 
     if [ -n "$name" ]; then
         call_gum format "### [+] Applied: $name"
     fi
-    call_gum format "### [+] Seed: $seed | Style: $style"
+    call_gum format "### [+] Seed: $seed | Style: $style | via: $method"
     call_gum format "### [!] System UI will update shortly."
 }
 

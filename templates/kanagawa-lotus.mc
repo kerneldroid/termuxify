@@ -1,4 +1,4 @@
 name=Kanagawa Lotus
-seed=#4D699B
+seed=#4566A2
 style=TONAL_SPOT
 source=home_wallpaper

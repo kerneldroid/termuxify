@@ -1,4 +1,4 @@
 name=Tokyo Night Storm
-seed=#7AA2F7
+seed=#3B6FDC
 style=TONAL_SPOT
 source=home_wallpaper

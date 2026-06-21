@@ -1,4 +1,4 @@
 name=Nord
-seed=#88C0D0
+seed=#5AA7BE
 style=TONAL_SPOT
 source=home_wallpaper

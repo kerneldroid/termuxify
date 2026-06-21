@@ -1,4 +1,4 @@
 name=Gruvbox
-seed=#D79921
+seed=#D29725
 style=TONAL_SPOT
 source=home_wallpaper

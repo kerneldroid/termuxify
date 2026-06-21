@@ -1,4 +1,4 @@
 name=Everforest Dark Soft
-seed=#A7C080
+seed=#96BA5E
 style=TONAL_SPOT
 source=home_wallpaper

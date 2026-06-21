@@ -1,4 +1,4 @@
 name=Oxocarbon Dark
-seed=#33B1FF
+seed=#3B9FDC
 style=TONAL_SPOT
 source=home_wallpaper

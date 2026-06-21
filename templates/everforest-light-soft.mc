@@ -1,4 +1,4 @@
 name=Everforest Light Soft
-seed=#8DA101
+seed=#88971A
 style=TONAL_SPOT
 source=home_wallpaper

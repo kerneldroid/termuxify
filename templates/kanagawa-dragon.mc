@@ -1,4 +1,4 @@
 name=Kanagawa Dragon
-seed=#8BA4B0
+seed=#5E9CBA
 style=TONAL_SPOT
 source=home_wallpaper

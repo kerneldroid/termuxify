@@ -1,4 +1,4 @@
 name=Catppuccin Mocha
-seed=#CBA6F7
+seed=#853BDC
 style=TONAL_SPOT
 source=home_wallpaper
