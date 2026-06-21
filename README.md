@@ -50,7 +50,7 @@ bash setup.sh
 Once installed, you can access the following tools from anywhere:
 
 - `ty`: The main TUI for Theme & Font Selection.
-- `mc`: Material Color Manager — apply .mc color schemes to Android system UI (requires root).
+- `mc`: Material Color Manager — apply .mc color schemes to Android system UI (requires root or Shizuku).
 - `ah`: Alias Manager (Add/Remove shell shortcuts).
 - `tc`: Tech Stack Selector (Install development environments).
 - `tt`: Termux Toolbox (Diagnostics for Root/Shizuku).
