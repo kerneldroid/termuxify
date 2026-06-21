@@ -94,10 +94,18 @@ extract_material_colors() {
   local theme_style="TONAL_SPOT"
   local overlay_json=""
 
-  overlay_json=$(settings get secure theme_customization_overlay_packages 2>/dev/null) || true
+  if command -v su >/dev/null 2>&1 && su -c id >/dev/null 2>&1; then
+    overlay_json=$(su -c 'settings get secure theme_customization_overlay_packages' 2>/dev/null) || true
+  fi
 
   if [ -z "$overlay_json" ] || [ "$overlay_json" = "null" ]; then
-    overlay_json=$(content query --uri content://settings/secure --where "name='theme_customization_overlay_packages'" --projection value 2>/dev/null | grep -o 'value=.*' | cut -d= -f2-) || true
+    if command -v rish >/dev/null 2>&1; then
+      overlay_json=$(rish -c 'settings get secure theme_customization_overlay_packages' 2>/dev/null) || true
+    fi
+  fi
+
+  if [ -z "$overlay_json" ] || [ "$overlay_json" = "null" ]; then
+    overlay_json=$(settings get secure theme_customization_overlay_packages 2>/dev/null) || true
   fi
 
   if [ -n "$overlay_json" ] && [ "$overlay_json" != "null" ]; then
