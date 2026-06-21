@@ -9,6 +9,9 @@ TEMPLATES_DIR="${SCRIPT_DIR}/../templates"
 PALETTE_SCRIPT="${SCRIPT_DIR}/../share/termuxify/material_palette.py"
 [ -f "$PALETTE_SCRIPT" ] || PALETTE_SCRIPT="${SCRIPT_DIR}/material_palette.py"
 
+PYTHON3=$(command -v python3 2>/dev/null || echo "${PREFIX}/bin/python3")
+[ -f "$PYTHON3" ] || PYTHON3="/data/data/com.termux/files/usr/bin/python3"
+
 for dep in gum python3; do
     if ! command -v "$dep" >/dev/null 2>&1; then
         echo -e "\e[1;31m[-] Error: Required dependency '$dep' is not installed.\e[0m"
@@ -40,6 +43,13 @@ check_access() {
     echo -e "\e[1;31m[-] Error: No root or Shizuku access found.\e[0m"
     echo -e "\e[1;33m[!] Install Magisk/KernelSU for root, or Nightzuku for ADB access.\e[0m"
     exit 1
+}
+
+bypass_coloros() {
+    if [ "$HAS_ROOT" = true ]; then
+        su -c 'settings put system is_system_color_follow_static_wallpaper false' 2>/dev/null
+        su -c 'settings put system oplus_customize_color_mode 1' 2>/dev/null
+    fi
 }
 
 settings_put() {
@@ -101,11 +111,13 @@ apply_settings_mode() {
     local source="$3"
     local name="$4"
 
+    bypass_coloros
+
     local seed_hex
     seed_hex=$(echo "$seed" | sed 's/#//')
 
     local json
-    json=$(python3 -c "
+    json=$("$PYTHON3" -c "
 import json
 data = {
     'android.theme.customization.system_palette': 'FF${seed_hex}',
@@ -134,23 +146,28 @@ apply_fabricated_mode() {
     local style="$2"
     local name="$3"
 
-    call_gum format "### [*] Generating Material You palette via HCT..."
+    bypass_coloros
+
+    call_gum format "### [*] Generating Material You palette..."
     call_gum format "### [*] Seed: $seed | Style: $style"
 
-    python3 "$PALETTE_SCRIPT" "$seed" "$style" overlay > /tmp/mc_overlay.txt 2>/dev/null
+    local tmp_overlay
+    tmp_overlay=$(mktemp)
+    "$PYTHON3" "$PALETTE_SCRIPT" "$seed" "$style" overlay > "$tmp_overlay" 2>/dev/null
 
-    if [ ! -s /tmp/mc_overlay.txt ]; then
+    if [ ! -s "$tmp_overlay" ]; then
         echo -e "\e[1;31m[-] Failed to generate palette.\e[0m"
+        rm -f "$tmp_overlay"
         return 1
     fi
 
     local overlay_count
-    overlay_count=$(wc -l < /tmp/mc_overlay.txt)
+    overlay_count=$(wc -l < "$tmp_overlay")
 
     call_gum format "### [*] Generated $overlay_count color resources."
 
     local json
-    json=$(python3 -c "
+    json=$("$PYTHON3" -c "
 import json
 data = {
     'android.theme.customization.system_palette': 'FF${seed_hex}',
@@ -240,7 +257,7 @@ elif [ "$ACTION" = "List Templates" ]; then
 
 elif [ "$ACTION" = "View Current Colors" ]; then
     echo -e "\e[1;34m[*] Current system palette:\e[0m"
-    settings_get "theme_customization_overlay_packages" 2>/dev/null | python3 -c "
+    settings_get "theme_customization_overlay_packages" 2>/dev/null | "$PYTHON3" -c "
 import sys, json
 try:
     d = json.load(sys.stdin)

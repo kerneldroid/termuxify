@@ -106,7 +106,7 @@ Termuxify supports and can configure the following shells:
 - [Catppuccin](https://github.com/catppuccin/catppuccin) — Soothing pastel theme.
 - [Kanagawa](https://github.com/rebelot/kanagawa.nvim) — Dark theme inspired by Kanagawa wave.
 - [Gruvbox](https://github.com/morhetz/gruvbox) — Retro groove color scheme.
-- [Oxocarbon](https://github.com/IBM/oxocarbon) — Carbon-inspired color palette.
+- [Oxocarbon](https://github.com/nyoom-engineering/oxocarbon.nvim) — Carbon-inspired color palette.
 
 ## License
 
