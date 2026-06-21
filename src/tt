@@ -24,11 +24,10 @@ else
     fi
 fi
 
-echo -e "\n\e[1;33m[2] Testing Nightzuku / Shizuku API & Connectors...\e[0m"
+echo -e "\n\e[1;33m[2] Testing Nightzuku API & Connector...\e[0m"
 
 echo -e "[*] Querying Nightzuku Connector API..."
 NIGHT_OUT=$(timeout 3 content query --uri content://kerneldroid.nightzuku.connector 2>/dev/null || true)
-SHI_OUT=$(timeout 3 content query --uri content://moe.shizuku.privileged.api.connector 2>/dev/null || true)
 
 PROVIDER_SUCCESS=false
 STARTUP_CMD=""
@@ -38,24 +37,19 @@ if echo "$NIGHT_OUT" | grep -q "command="; then
     echo -e "\e[1;32m[+] Nightzuku Connector is ACTIVE! Retrieved startup command.\e[0m"
     echo -e "\e[1;32m[+] Command: $STARTUP_CMD\e[0m"
     PROVIDER_SUCCESS=true
-elif echo "$SHI_OUT" | grep -q "command="; then
-    STARTUP_CMD=$(echo "$SHI_OUT" | grep -o 'command=.*' | cut -d= -f2-)
-    echo -e "\e[1;32m[+] Shizuku Connector is ACTIVE! Retrieved startup command.\e[0m"
-    echo -e "\e[1;32m[+] Command: $STARTUP_CMD\e[0m"
-    PROVIDER_SUCCESS=true
 else
-    echo -e "\e[1;31m[-] Connectors are not active or Nightzuku/Shizuku is not installed.\e[0m"
-    echo -e "\e[1;33m[!] Action: Enable \"Shizuku/Nightzuku Connectors\" in Lab Features settings.\e[0m"
+    echo -e "\e[1;31m[-] Nightzuku Connector is not active or Nightzuku is not installed.\e[0m"
+    echo -e "\e[1;33m[!] Action: Enable \"Nightzuku Connector\" in Lab Features settings.\e[0m"
 fi
 
 echo -e "[*] Testing ServiceManager Binder connection..."
 if /system/bin/cmd shizuku info >/dev/null 2>&1 || cmd shizuku info >/dev/null 2>&1; then
-    echo -e "\e[1;32m[+] Shizuku/Nightzuku binder service is active in ServiceManager.\e[0m"
+    echo -e "\e[1;32m[+] Nightzuku binder service is active in ServiceManager.\e[0m"
     
     RISH_BIN=$(command -v rish 2>/dev/null || true)
     if [ -n "$RISH_BIN" ]; then
         echo -e "\e[1;32m[+] Found rish client at: $RISH_BIN\e[0m"
-        echo -e "[*] Testing active execution permissions through Shizuku binder..."
+        echo -e "[*] Testing active execution permissions through Nightzuku binder..."
         
         if RISH_EXEC=$(timeout 3 rish -c "id" 2>/dev/null); then
             if echo "$RISH_EXEC" | grep -E 'uid=2000|uid=0' >/dev/null; then
@@ -70,14 +64,10 @@ if /system/bin/cmd shizuku info >/dev/null 2>&1 || cmd shizuku info >/dev/null 2
                 
                 echo -e "[*] Checking installed ADB Modules..."
                 NIGHT_MODS=$(rish -c "ls -la /data/user/0/kerneldroid.nightzuku/files/adb_modules/ 2>/dev/null | grep -v '^total'" 2>/dev/null || true)
-                SHI_MODS=$(rish -c "ls -la /data/user/0/moe.shizuku.privileged.api/files/adb_modules/ 2>/dev/null | grep -v '^total'" 2>/dev/null || true)
                 
                 if [ -n "$NIGHT_MODS" ]; then
                     echo -e "\e[1;32m[+] Installed Nightzuku ADB Modules:\e[0m"
                     echo "$NIGHT_MODS" | awk '{print "  - " $NF}'
-                elif [ -n "$SHI_MODS" ]; then
-                    echo -e "\e[1;32m[+] Installed Shizuku ADB Modules:\e[0m"
-                    echo "$SHI_MODS" | awk '{print "  - " $NF}'
                 else
                     echo -e "\e[1;33m[-] No ADB Modules found.\e[0m"
                 fi
@@ -90,11 +80,11 @@ if /system/bin/cmd shizuku info >/dev/null 2>&1 || cmd shizuku info >/dev/null 2
         fi
     else
         echo -e "\e[1;31m[-] ERROR: rish connector not found in PATH.\e[0m"
-        echo -e "\e[1;33m[!] Tip: Copy rish files from the Shizuku app (use \"Export files\" in the Shizuku app) to your Termux bin directory.\e[0m"
+        echo -e "\e[1;33m[!] Tip: Copy rish files from the Nightzuku app to your Termux bin directory.\e[0m"
     fi
 else
-    echo -e "\e[1;31m[-] ERROR: Shizuku binder service is NOT active in the system.\e[0m"
-    echo -e "\e[1;33m[!] Action: Open Shizuku/Nightzuku app and start it via Wireless Debugging or Root.\e[0m"
+    echo -e "\e[1;31m[-] ERROR: Nightzuku binder service is NOT active in the system.\e[0m"
+    echo -e "\e[1;33m[!] Action: Open Nightzuku app and start it via Wireless Debugging or Root.\e[0m"
 fi
 
 echo -e "\n\e[1;32m[+] Testing complete.\e[0m"
