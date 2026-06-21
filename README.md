@@ -95,6 +95,19 @@ Termuxify supports and can configure the following shells:
 - **Zsh**
 - **Fish**
 
+## Credits
+
+- [ColorBlendr](https://github.com/Mahmud0808/ColorBlendr) — Material You color customization app. The `mc` command and `.mc` format are inspired by ColorBlendr's architecture. Material You palette generation concepts based on AOSP's Monet engine.
+- [Thundra](https://github.com/kerneldroid/Thundra) — Arctic-inspired color scheme family.
+- [Tokyo Night](https://github.com/folke/tokyonight.nvim) — Dark theme based on Tokyo's night sky.
+- [Everforest](https://github.com/sainnhe/everforest) — Green-based comfortable theme.
+- [OkColors](https://github.com/e-q/okcolors.nvim) — OKLab-based accessible color scheme.
+- [Nord](https://github.com/nordtheme/nord) — Arctic, north-bluish color palette.
+- [Catppuccin](https://github.com/catppuccin/catppuccin) — Soothing pastel theme.
+- [Kanagawa](https://github.com/rebelot/kanagawa.nvim) — Dark theme inspired by Kanagawa wave.
+- [Gruvbox](https://github.com/morhetz/gruvbox) — Retro groove color scheme.
+- [Oxocarbon](https://github.com/IBM/oxocarbon) — Carbon-inspired color palette.
+
 ## License
 
 Standard Distribution License.

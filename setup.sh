@@ -93,10 +93,13 @@ for script in $SCRIPTS; do
     fi
 done
 
-echo -e "\e[1;33m[*] Installing Material Color templates...\e[0m"
+echo -e "\e[1;33m[*] Installing Material Color templates and palette generator...\e[0m"
 mkdir -p "${PREFIX}/share/termuxify/templates"
 if [ -d "$SCRIPT_DIR/templates" ]; then
     cp "$SCRIPT_DIR/templates/"*.mc "${PREFIX}/share/termuxify/templates/" 2>/dev/null || true
+fi
+if [ -f "$SCRIPT_DIR/src/material_palette.py" ]; then
+    cp "$SCRIPT_DIR/src/material_palette.py" "${PREFIX}/share/termuxify/material_palette.py" 2>/dev/null || true
 fi
 
 echo -e "\e[1;33m[*] Installing NerdFetch...\e[0m"
