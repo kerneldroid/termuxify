@@ -37,9 +37,18 @@ declare -A THEMES
 
 THEMES["Gruvbox"]="background=#282828\nforeground=#ebdbb2\ncursor=#ebdbb2\ncolor0=#282828\ncolor1=#cc241d\ncolor2=#98971a\ncolor3=#d79921\ncolor4=#458588\ncolor5=#b16286\ncolor6=#689d6a\ncolor7=#a89984\ncolor8=#928374\ncolor9=#fb4934\ncolor10=#b8bb26\ncolor11=#fabd2f\ncolor12=#83a598\ncolor13=#d3869b\ncolor14=#8ec07c\ncolor15=#ebdbb2"
 THEMES["Gruvbox Material"]="background=#1d2021\nforeground=#d4be98\ncursor=#d4be98\ncolor0=#32302f\ncolor1=#ea6962\ncolor2=#a9b665\ncolor3=#d8a657\ncolor4=#7daea3\ncolor5=#d3869b\ncolor6=#89b482\ncolor7=#d4be98\ncolor8=#32302f\ncolor9=#ea6962\ncolor10=#a9b665\ncolor11=#d8a657\ncolor12=#7daea3\ncolor13=#d3869b\ncolor14=#89b482\ncolor15=#d4be98"
-THEMES["Everforest"]="background=#2d353b\nforeground=#d3c6aa\ncursor=#d3c6aa\ncolor0=#475258\ncolor1=#e67e80\ncolor2=#a7c080\ncolor3=#dbbc7f\ncolor4=#7fbbb3\ncolor5=#d699b6\ncolor6=#83c092\ncolor7=#d3c6aa\ncolor8=#475258\ncolor9=#e67e80\ncolor10=#a7c080\ncolor11=#dbbc7f\ncolor12=#7fbbb3\ncolor13=#d699b6\ncolor14=#83c092\ncolor15=#d3c6aa"
-THEMES["Nord"]="background=#2e3440\nforeground=#d8dee9\ncursor=#d8dee9\ncolor0=#3b4252\ncolor1=#bf616a\ncolor2=#a3be8c\ncolor3=#ebcb8b\ncolor4=#81a1c1\ncolor5=#b48ead\ncolor6=#88c0d0\ncolor7=#e5e9f0\ncolor8=#4c566a\ncolor9=#bf616a\ncolor10=#a3be8c\ncolor11=#ebcb8b\ncolor12=#81a1c1\ncolor13=#b48ead\ncolor14=#8fbcbb\ncolor15=#eceff4"
+THEMES["Everforest Dark Hard"]="background=#272e33\nforeground=#d3c6aa\ncursor=#a7c080\ncolor0=#272e33\ncolor1=#e67e80\ncolor2=#a7c080\ncolor3=#dbbc7f\ncolor4=#7fbbb3\ncolor5=#d699b6\ncolor6=#83c092\ncolor7=#d3c6aa\ncolor8=#475258\ncolor9=#e67e80\ncolor10=#a7c080\ncolor11=#dbbc7f\ncolor12=#7fbbb3\ncolor13=#d699b6\ncolor14=#83c092\ncolor15=#d3c6aa"
+THEMES["Everforest Dark Medium"]="background=#2d353b\nforeground=#d3c6aa\ncursor=#a7c080\ncolor0=#2d353b\ncolor1=#e67e80\ncolor2=#a7c080\ncolor3=#dbbc7f\ncolor4=#7fbbb3\ncolor5=#d699b6\ncolor6=#83c092\ncolor7=#d3c6aa\ncolor8=#475258\ncolor9=#e67e80\ncolor10=#a7c080\ncolor11=#dbbc7f\ncolor12=#7fbbb3\ncolor13=#d699b6\ncolor14=#83c092\ncolor15=#d3c6aa"
+THEMES["Everforest Dark Soft"]="background=#333c43\nforeground=#d3c6aa\ncursor=#a7c080\ncolor0=#333c43\ncolor1=#e67e80\ncolor2=#a7c080\ncolor3=#dbbc7f\ncolor4=#7fbbb3\ncolor5=#d699b6\ncolor6=#83c092\ncolor7=#d3c6aa\ncolor8=#475258\ncolor9=#e67e80\ncolor10=#a7c080\ncolor11=#dbbc7f\ncolor12=#7fbbb3\ncolor13=#d699b6\ncolor14=#83c092\ncolor15=#d3c6aa"
+THEMES["Everforest Light Hard"]="background=#fffbef\nforeground=#5c6a72\ncursor=#8da101\ncolor0=#fffbef\ncolor1=#f85552\ncolor2=#8da101\ncolor3=#dfa000\ncolor4=#3a94c5\ncolor5=#df69ba\ncolor6=#35a77c\ncolor7=#5c6a72\ncolor8=#a6b0a0\ncolor9=#f85552\ncolor10=#8da101\ncolor11=#dfa000\ncolor12=#3a94c5\ncolor13=#df69ba\ncolor14=#35a77c\ncolor15=#5c6a72"
+THEMES["Everforest Light Medium"]="background=#fdf6e3\nforeground=#5c6a72\ncursor=#8da101\ncolor0=#fdf6e3\ncolor1=#f85552\ncolor2=#8da101\ncolor3=#dfa000\ncolor4=#3a94c5\ncolor5=#df69ba\ncolor6=#35a77c\ncolor7=#5c6a72\ncolor8=#a6b0a0\ncolor9=#f85552\ncolor10=#8da101\ncolor11=#dfa000\ncolor12=#3a94c5\ncolor13=#df69ba\ncolor14=#35a77c\ncolor15=#5c6a72"
+THEMES["Everforest Light Soft"]="background=#f3ead3\nforeground=#5c6a72\ncursor=#8da101\ncolor0=#f3ead3\ncolor1=#f85552\ncolor2=#8da101\ncolor3=#dfa000\ncolor4=#3a94c5\ncolor5=#df69ba\ncolor6=#35a77c\ncolor7=#5c6a72\ncolor8=#a6b0a0\ncolor9=#f85552\ncolor10=#8da101\ncolor11=#dfa000\ncolor12=#3a94c5\ncolor13=#df69ba\ncolor14=#35a77c\ncolor15=#5c6a72"
+THEMES["Nord"]="background=#2e3440\nforeground=#d8dee9\ncursor=#88c0d0\ncolor0=#3b4252\ncolor1=#bf616a\ncolor2=#a3be8c\ncolor3=#ebcb8b\ncolor4=#81a1c1\ncolor5=#b48ead\ncolor6=#88c0d0\ncolor7=#e5e9f0\ncolor8=#4c566a\ncolor9=#bf616a\ncolor10=#a3be8c\ncolor11=#ebcb8b\ncolor12=#81a1c1\ncolor13=#b48ead\ncolor14=#8fbcbb\ncolor15=#eceff4"
+
 THEMES["Tokyo Night"]="background=#1a1b26\nforeground=#a9b1d6\ncursor=#c0caf5\ncolor0=#15161e\ncolor1=#f7768e\ncolor2=#9ece6a\ncolor3=#e0af68\ncolor4=#7aa2f7\ncolor5=#bb9af7\ncolor6=#7dcfff\ncolor7=#a9b1d6\ncolor8=#414868\ncolor9=#f7768e\ncolor10=#9ece6a\ncolor11=#e0af68\ncolor12=#7aa2f7\ncolor13=#bb9af7\ncolor14=#7dcfff\ncolor15=#c0caf5"
+THEMES["Tokyo Night Storm"]="background=#1f2335\nforeground=#a9b1d6\ncursor=#c0caf5\ncolor0=#1d202f\ncolor1=#f7768e\ncolor2=#9ece6a\ncolor3=#e0af68\ncolor4=#7aa2f7\ncolor5=#bb9af7\ncolor6=#7dcfff\ncolor7=#a9b1d6\ncolor8=#414868\ncolor9=#f7768e\ncolor10=#9ece6a\ncolor11=#e0af68\ncolor12=#7aa2f7\ncolor13=#bb9af7\ncolor14=#7dcfff\ncolor15=#c0caf5"
+THEMES["Tokyo Night Moon"]="background=#1e2030\nforeground=#828bb8\ncursor=#82aaff\ncolor0=#1b1d2b\ncolor1=#ff757f\ncolor2=#c3e88d\ncolor3=#ffc777\ncolor4=#82aaff\ncolor5=#c792ea\ncolor6=#86e1fc\ncolor7=#828bb8\ncolor8=#444a64\ncolor9=#ff757f\ncolor10=#c3e88d\ncolor11=#ffc777\ncolor12=#82aaff\ncolor13=#c792ea\ncolor14=#86e1fc\ncolor15=#c0caf5"
+THEMES["Tokyo Night Day"]="background=#d0d5e3\nforeground=#6172b0\ncursor=#2e7de9\ncolor0=#b4b5b9\ncolor1=#f52a65\ncolor2=#587539\ncolor3=#8c6c3e\ncolor4=#2e7de9\ncolor5=#a480df\ncolor6=#0f4b6e\ncolor7=#6172b0\ncolor8=#8c8fa1\ncolor9=#f52a65\ncolor10=#587539\ncolor11=#8c6c3e\ncolor12=#2e7de9\ncolor13=#a480df\ncolor14=#0f4b6e\ncolor15=#3760bf"
 
 THEMES["Catppuccin Mocha"]="background=#1e1e2e\nforeground=#cdd6f4\ncursor=#f5e0dc\ncolor0=#45475a\ncolor1=#f38ba8\ncolor2=#a6e3a1\ncolor3=#f9e2af\ncolor4=#8caaee\ncolor5=#f5c2e7\ncolor6=#94e2d5\ncolor7=#bac2de\ncolor8=#585b70\ncolor9=#f38ba8\ncolor10=#a6e3a1\ncolor11=#f9e2af\ncolor12=#8caaee\ncolor13=#f5c2e7\ncolor14=#94e2d5\ncolor15=#a6adc8"
 THEMES["Catppuccin Macchiato"]="background=#24273a\nforeground=#cad3f5\ncursor=#f4dbd6\ncolor0=#494d64\ncolor1=#ed8796\ncolor2=#a6da95\ncolor3=#eed49f\ncolor4=#8aadf4\ncolor5=#f5bde6\ncolor6=#8bd5ca\ncolor7=#b8c0e0\ncolor8=#5b6078\ncolor9=#ed8796\ncolor10=#a6da95\ncolor11=#eed49f\ncolor12=#8aadf4\ncolor13=#f5bde6\ncolor14=#8bd5ca\ncolor15=#a5adcb"
@@ -60,16 +69,175 @@ THEMES["Aethel Light Hard"]="background=#ebdcbe\nforeground=#3a3429\ncursor=#3a3
 THEMES["Aethel Light Medium"]="background=#f5eada\nforeground=#3a3429\ncursor=#3a3429\ncolor0=#f5eada\ncolor1=#8c4b44\ncolor2=#4e6b3b\ncolor3=#7d5b22\ncolor4=#2b6189\ncolor5=#844a70\ncolor6=#256e62\ncolor7=#3a3429\ncolor8=#7e786b\ncolor9=#8c4b44\ncolor10=#4e6b3b\ncolor11=#7d5b22\ncolor12=#2b6189\ncolor13=#844a70\ncolor14=#256e62\ncolor15=#11161a"
 THEMES["Aethel Light Soft"]="background=#faf5eb\nforeground=#3a3429\ncursor=#3a3429\ncolor0=#faf5eb\ncolor1=#8c4b44\ncolor2=#4e6b3b\ncolor3=#7d5b22\ncolor4=#2b6189\ncolor5=#844a70\ncolor6=#256e62\ncolor7=#3a3429\ncolor8=#7e786b\ncolor9=#8c4b44\ncolor10=#4e6b3b\ncolor11=#7d5b22\ncolor12=#2b6189\ncolor13=#844a70\ncolor14=#256e62\ncolor15=#11161a"
 
+THEMES["OkColors Dark Smooth"]="background=#14161b\nforeground=#e0ded7\ncursor=#9eb5f8\ncolor0=#202127\ncolor1=#fd9599\ncolor2=#88ca95\ncolor3=#d0b56a\ncolor4=#9eb5f8\ncolor5=#c7a7ea\ncolor6=#5fc9db\ncolor7=#e0ded7\ncolor8=#383a40\ncolor9=#fd9599\ncolor10=#88ca95\ncolor11=#d0b56a\ncolor12=#9eb5f8\ncolor13=#c7a7ea\ncolor14=#5fc9db\ncolor15=#e0ded7"
+THEMES["OkColors Dark Sharp"]="background=#000000\nforeground=#dedede\ncursor=#9cb4fe\ncolor0=#222222\ncolor1=#fb979a\ncolor2=#19db69\ncolor3=#ddb227\ncolor4=#9cb4fe\ncolor5=#ce9ffe\ncolor6=#22cde5\ncolor7=#dedede\ncolor8=#3a3a3a\ncolor9=#fb979a\ncolor10=#19db69\ncolor11=#ddb227\ncolor12=#9cb4fe\ncolor13=#ce9ffe\ncolor14=#22cde5\ncolor15=#dedede"
+THEMES["OkColors Light Smooth"]="background=#fefcf4\nforeground=#2c2e33\ncursor=#6377b6\ncolor0=#202127\ncolor1=#d7314b\ncolor2=#4b8b5a\ncolor3=#91772a\ncolor4=#6377b6\ncolor5=#896aa9\ncolor6=#028a9b\ncolor7=#2c2e33\ncolor8=#383a40\ncolor9=#d7314b\ncolor10=#4b8b5a\ncolor11=#91772a\ncolor12=#6377b6\ncolor13=#896aa9\ncolor14=#028a9b\ncolor15=#2c2e33"
+THEMES["OkColors Light Sharp"]="background=#ffffff\nforeground=#030303\ncursor=#5e78d9\ncolor0=#222222\ncolor1=#de3951\ncolor2=#139948\ncolor3=#9c7c0b\ncolor4=#5e78d9\ncolor5=#a053e1\ncolor6=#1590a1\ncolor7=#030303\ncolor8=#3a3a3a\ncolor9=#de3951\ncolor10=#139948\ncolor11=#9c7c0b\ncolor12=#5e78d9\ncolor13=#a053e1\ncolor14=#1590a1\ncolor15=#030303"
+
+THEMES["Thundra Dark Hard"]="background=#0F1315\nforeground=#D5DBD6\ncursor=#F8F9FA\ncolor0=#0F1315\ncolor1=#D95C50\ncolor2=#7A9C68\ncolor3=#D8B76E\ncolor4=#74A8D6\ncolor5=#9B7A9E\ncolor6=#6BA4A8\ncolor7=#D5DBD6\ncolor8=#687678\ncolor9=#D95C50\ncolor10=#7A9C68\ncolor11=#D8B76E\ncolor12=#74A8D6\ncolor13=#9B7A9E\ncolor14=#6BA4A8\ncolor15=#F8F9FA"
+THEMES["Thundra Dark Normal"]="background=#161B1D\nforeground=#D5DBD6\ncursor=#F8F9FA\ncolor0=#161B1D\ncolor1=#D95C50\ncolor2=#7A9C68\ncolor3=#D8B76E\ncolor4=#74A8D6\ncolor5=#9B7A9E\ncolor6=#6BA4A8\ncolor7=#D5DBD6\ncolor8=#687678\ncolor9=#D95C50\ncolor10=#7A9C68\ncolor11=#D8B76E\ncolor12=#74A8D6\ncolor13=#9B7A9E\ncolor14=#6BA4A8\ncolor15=#F8F9FA"
+THEMES["Thundra Dark Soft"]="background=#1D2426\nforeground=#D5DBD6\ncursor=#F8F9FA\ncolor0=#1D2426\ncolor1=#D95C50\ncolor2=#7A9C68\ncolor3=#D8B76E\ncolor4=#74A8D6\ncolor5=#9B7A9E\ncolor6=#6BA4A8\ncolor7=#D5DBD6\ncolor8=#687678\ncolor9=#D95C50\ncolor10=#7A9C68\ncolor11=#D8B76E\ncolor12=#74A8D6\ncolor13=#9B7A9E\ncolor14=#6BA4A8\ncolor15=#F8F9FA"
+THEMES["Thundra Light Hard"]="background=#F8F9FA\nforeground=#2C3638\ncursor=#0F1315\ncolor0=#F8F9FA\ncolor1=#B83B32\ncolor2=#4D7338\ncolor3=#A6822C\ncolor4=#1E659A\ncolor5=#734C76\ncolor6=#34787D\ncolor7=#2C3638\ncolor8=#8B9A9C\ncolor9=#B83B32\ncolor10=#4D7338\ncolor11=#A6822C\ncolor12=#1E659A\ncolor13=#734C76\ncolor14=#34787D\ncolor15=#0F1315"
+THEMES["Thundra Light Normal"]="background=#EBF0F2\nforeground=#2C3638\ncursor=#0F1315\ncolor0=#EBF0F2\ncolor1=#B83B32\ncolor2=#4D7338\ncolor3=#A6822C\ncolor4=#1E659A\ncolor5=#734C76\ncolor6=#34787D\ncolor7=#2C3638\ncolor8=#8B9A9C\ncolor9=#B83B32\ncolor10=#4D7338\ncolor11=#A6822C\ncolor12=#1E659A\ncolor13=#734C76\ncolor14=#34787D\ncolor15=#0F1315"
+THEMES["Thundra Light Soft"]="background=#DFE5E8\nforeground=#2C3638\ncursor=#0F1315\ncolor0=#DFE5E8\ncolor1=#B83B32\ncolor2=#4D7338\ncolor3=#A6822C\ncolor4=#1E659A\ncolor5=#734C76\ncolor6=#34787D\ncolor7=#2C3638\ncolor8=#8B9A9C\ncolor9=#B83B32\ncolor10=#4D7338\ncolor11=#A6822C\ncolor12=#1E659A\ncolor13=#734C76\ncolor14=#34787D\ncolor15=#0F1315"
+
+THEMES["Material Color (System)"]=""
+THEMES["Material Color (Tonal Spot)"]="background=#FFFBFE\nforeground=#1C1B1F\ncursor=#6750A4\ncolor0=#1C1B1F\ncolor1=#B3261E\ncolor2=#386A20\ncolor3=#7D5700\ncolor4=#6750A4\ncolor5=#7D5260\ncolor6=#006B5F\ncolor7=#FFFBFE\ncolor8=#49454F\ncolor9=#F2B8B5\ncolor10=#A8DAB5\ncolor11=#DCC78E\ncolor12=#D0BCFF\ncolor13=#E8BDE0\ncolor14=#A0C9C0\ncolor15=#FFD8E4"
+THEMES["Material Color (Expressive)"]="background=#1B1B1F\nforeground=#E6E1E5\ncursor=#E8DEF8\ncolor0=#1B1B1F\ncolor1=#FFB4AB\ncolor2=#A5D6A7\ncolor3=#FFD54F\ncolor4=#D0BCFF\ncolor5=#EFBCD5\ncolor6=#80DEEA\ncolor7=#E6E1E5\ncolor8=#49454F\ncolor9=#FF897D\ncolor10=#66BB6A\ncolor11=#FFC107\ncolor12=#B39DDB\ncolor13=#F48FB1\ncolor14=#4DD0E1\ncolor15=#FFFFFF"
+THEMES["Material Color (Vibrant)"]="background=#1A1C1E\nforeground=#E2E2E6\ncursor=#A0C9FF\ncolor0=#1A1C1E\ncolor1=#FFB3B1\ncolor2=#82D68B\ncolor3=#FFD88A\ncolor4=#A0C9FF\ncolor5=#E4B3F0\ncolor6=#7CDBE4\ncolor7=#E2E2E6\ncolor8=#44474A\ncolor9=#FF8A86\ncolor10=#50C960\ncolor11=#FFBA33\ncolor12=#6EB3FF\ncolor13=#D88DE0\ncolor14=#4AC8D6\ncolor15=#FFFFFF"
+THEMES["Material Color (Spritz)"]="background=#F9F9FC\nforeground=#1B1B1F\ncursor=#7D5260\ncolor0=#1B1B1F\ncolor1=#BA1A1A\ncolor2=#3A691C\ncolor3=#7C5800\ncolor4=#6750A4\ncolor5=#7D5260\ncolor6=#006B5A\ncolor7=#F9F9FC\ncolor8=#C4C6CF\ncolor9=#FFDAD6\ncolor10=#C2EABC\ncolor11=#F5DEB3\ncolor12=#D8C2FF\ncolor13=#F5D0E0\ncolor14=#B0E0D4\ncolor15=#FFD8E4"
+THEMES["Material Color (Rainbow)"]="background=#1B1B1F\nforeground=#E6E1E5\ncursor=#6750A4\ncolor0=#1B1B1F\ncolor1=#FF6B6B\ncolor2=#6BCB77\ncolor3=#FFD93D\ncolor4=#6C9CFF\ncolor5=#D580FF\ncolor6=#4ECDC4\ncolor7=#E6E1E5\ncolor8=#49454F\ncolor9=#FF4444\ncolor10=#4ADE80\ncolor11=#FACC15\ncolor12=#3B82F6\ncolor13=#C084FC\ncolor14=#2DD4BF\ncolor15=#FFFFFF"
+THEMES["Material Color (Fruit Salad)"]="background=#1C1B1F\nforeground=#E6E1E5\ncursor=#FF8A65\ncolor0=#1C1B1F\ncolor1=#FF7043\ncolor2=#AED581\ncolor3=#FFD54F\ncolor4=#64B5F6\ncolor5=#CE93D8\ncolor6=#4DB6AC\ncolor7=#E6E1E5\ncolor8=#49454F\ncolor9=#FF5722\ncolor10=#8BC34A\ncolor11=#FFC107\ncolor12=#2196F3\ncolor13=#AB47BC\ncolor14=#26A69A\ncolor15=#FFFFFF"
+
+extract_material_colors() {
+  local seed_hex=""
+  local theme_style="TONAL_SPOT"
+  local overlay_json=""
+
+  overlay_json=$(settings get secure theme_customization_overlay_packages 2>/dev/null) || true
+
+  if [ -z "$overlay_json" ] || [ "$overlay_json" = "null" ]; then
+    overlay_json=$(content query --uri content://settings/secure --where "name='theme_customization_overlay_packages'" --projection value 2>/dev/null | grep -o 'value=.*' | cut -d= -f2-) || true
+  fi
+
+  if [ -n "$overlay_json" ] && [ "$overlay_json" != "null" ]; then
+    seed_hex=$(echo "$overlay_json" | python3 -c "
+import sys, json
+try:
+    d = json.load(sys.stdin)
+    print(d.get('android.theme.customization.system_palette', ''))
+except:
+    print('')
+" 2>/dev/null) || true
+
+    theme_style=$(echo "$overlay_json" | python3 -c "
+import sys, json
+try:
+    d = json.load(sys.stdin)
+    print(d.get('android.theme.customization.theme_style', 'TONAL_SPOT'))
+except:
+    print('TONAL_SPOT')
+" 2>/dev/null) || true
+  fi
+
+  if [ -n "$seed_hex" ] && [ "$seed_hex" != "null" ] && [ "$seed_hex" != "" ]; then
+    THEMES["Material Color (System)"]=$(python3 -c "
+import colorsys
+
+def hex_to_rgb(h):
+    h = h.lstrip('#')
+    if len(h) == 8:
+        h = h[2:]
+    return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+
+def rgb_to_hex(r, g, b):
+    return '#{:02X}{:02X}{:02X}'.format(
+        max(0, min(255, int(round(r)))),
+        max(0, min(255, int(round(g)))),
+        max(0, min(255, int(round(b))))
+    )
+
+def hsl_to_rgb(h, s, l):
+    h = h % 360
+    s = max(0, min(1, s))
+    l = max(0, min(1, l))
+    c = (1 - abs(2 * l - 1)) * s
+    x = c * (1 - abs((h / 60) % 2 - 1))
+    m = l - c / 2
+    if h < 60:
+        r, g, b = c, x, 0
+    elif h < 120:
+        r, g, b = x, c, 0
+    elif h < 180:
+        r, g, b = 0, c, x
+    elif h < 240:
+        r, g, b = 0, x, c
+    elif h < 300:
+        r, g, b = x, 0, c
+    else:
+        r, g, b = c, 0, x
+    return ((r + m) * 255, (g + m) * 255, (b + m) * 255)
+
+seed = '$seed_hex'
+r, g, b = hex_to_rgb(seed)
+h, l, s = colorsys.rgb_to_hls(r/255.0, g/255.0, b/255.0)
+seed_hue = h * 360.0
+seed_sat = s
+seed_light = l
+
+style = '$theme_style'
+
+if style == 'VIBRANT':
+    a1s, a2s, a3s = min(1.0, seed_sat * 1.3), min(1.0, seed_sat * 1.1), min(1.0, seed_sat * 1.2)
+elif style == 'EXPRESSIVE':
+    a1s, a2s, a3s = min(1.0, seed_sat * 1.2), min(1.0, seed_sat * 1.0), min(1.0, seed_sat * 1.4)
+elif style == 'SPRITZ':
+    a1s, a2s, a3s = seed_sat * 0.6, seed_sat * 0.5, seed_sat * 0.65
+elif style == 'RAINBOW':
+    a1s, a2s, a3s = min(1.0, seed_sat * 1.1), min(1.0, seed_sat * 1.0), min(1.0, seed_sat * 1.1)
+elif style == 'FRUIT_SALAD':
+    a1s, a2s, a3s = min(1.0, seed_sat * 1.3), min(1.0, seed_sat * 0.9), min(1.0, seed_sat * 1.2)
+else:
+    a1s, a2s, a3s = min(1.0, seed_sat * 1.0), min(1.0, seed_sat * 0.8), min(1.0, seed_sat * 0.9)
+
+def tone(hue, sat, lightness):
+    r, g, b = hsl_to_rgb(hue % 360, sat, lightness)
+    return rgb_to_hex(r, g, b)
+
+bg = tone(seed_hue, seed_sat * 0.15, 0.12)
+fg = tone(seed_hue, seed_sat * 0.1, 0.9)
+cursor_c = tone(seed_hue, a1s, 0.45)
+
+lines = [
+    f'background={bg}',
+    f'foreground={fg}',
+    f'cursor={cursor_c}',
+    f'color0={tone(seed_hue, seed_sat * 0.2, 0.08)}',
+    f'color1={tone(seed_hue, a1s, 0.5)}',
+    f'color2={tone(seed_hue + 60, a3s, 0.4)}',
+    f'color3={tone(seed_hue + 30, a2s, 0.5)}',
+    f'color4={tone(seed_hue, a1s * 0.9, 0.6)}',
+    f'color5={tone(seed_hue + 60, a3s * 0.9, 0.55)}',
+    f'color6={tone(seed_hue + 30, a2s * 0.9, 0.5)}',
+    f'color7={fg}',
+    f'color8={tone(seed_hue, seed_sat * 0.15, 0.25)}',
+    f'color9={tone(seed_hue, a1s, 0.65)}',
+    f'color10={tone(seed_hue + 60, a3s, 0.55)}',
+    f'color11={tone(seed_hue + 30, a2s, 0.6)}',
+    f'color12={tone(seed_hue, a1s, 0.75)}',
+    f'color13={tone(seed_hue + 60, a3s, 0.7)}',
+    f'color14={tone(seed_hue + 30, a2s, 0.65)}',
+    f'color15={tone(seed_hue, seed_sat * 0.05, 0.97)}',
+]
+print('\\\\n'.join(lines))
+" 2>/dev/null) || true
+  fi
+
+  if [ -z "${THEMES["Material Color (System)"]}" ]; then
+    THEMES["Material Color (System)"]="${THEMES["Material Color (Tonal Spot)"]}"
+  fi
+}
+
 ACTION=$(call_gum choose "Theme & Font Selection" "Change Default Shell" --header "Termuxify Menu:")
 
 if [ "$ACTION" = "Theme & Font Selection" ]; then
-  CATEGORY=$(call_gum choose "Aethel" "Catppuccin" "Kanagawa" "Oxocarbon" "Gruvbox" "Everforest" "Nord" "Tokyo Night" --header "Select Theme Category:")
+  CATEGORY=$(call_gum choose "Thundra" "Material Color" "Tokyo Night" "Everforest" "OkColors" "Aethel" "Catppuccin" "Kanagawa" "Oxocarbon" "Gruvbox" "Nord" --header "Select Theme Category:")
   
   case "$CATEGORY" in
+    "Thundra") THEME_NAME=$(call_gum choose "Thundra Dark Hard" "Thundra Dark Normal" "Thundra Dark Soft" "Thundra Light Hard" "Thundra Light Normal" "Thundra Light Soft") ;;
+    "Material Color")
+      extract_material_colors
+      THEME_NAME=$(call_gum choose "Material Color (System)" "Material Color (Tonal Spot)" "Material Color (Expressive)" "Material Color (Vibrant)" "Material Color (Spritz)" "Material Color (Rainbow)" "Material Color (Fruit Salad)" --header "Select Material Color Style:")
+      ;;
+    "Tokyo Night") THEME_NAME=$(call_gum choose "Tokyo Night" "Tokyo Night Storm" "Tokyo Night Moon" "Tokyo Night Day") ;;
+    "Everforest") THEME_NAME=$(call_gum choose "Everforest Dark Hard" "Everforest Dark Medium" "Everforest Dark Soft" "Everforest Light Hard" "Everforest Light Medium" "Everforest Light Soft") ;;
+    "OkColors") THEME_NAME=$(call_gum choose "OkColors Dark Smooth" "OkColors Dark Sharp" "OkColors Light Smooth" "OkColors Light Sharp") ;;
     "Aethel") THEME_NAME=$(call_gum choose "Aethel Dark Hard" "Aethel Dark Medium" "Aethel Dark Soft" "Aethel Light Hard" "Aethel Light Medium" "Aethel Light Soft") ;;
     "Catppuccin") THEME_NAME=$(call_gum choose "Catppuccin Mocha" "Catppuccin Macchiato" "Catppuccin Frappe" "Catppuccin Latte") ;;
     "Kanagawa") THEME_NAME=$(call_gum choose "Kanagawa Wave" "Kanagawa Dragon" "Kanagawa Lotus") ;;
     "Oxocarbon") THEME_NAME=$(call_gum choose "Oxocarbon Dark" "Oxocarbon Light") ;;
+    "Gruvbox") THEME_NAME=$(call_gum choose "Gruvbox" "Gruvbox Material") ;;
+    "Nord") THEME_NAME="Nord" ;;
     *) THEME_NAME="$CATEGORY" ;;
   esac
 
@@ -135,7 +303,7 @@ EOF
       if ! grep -q "termuxify_config.nu" "$HOME/.config/nushell/config.nu" 2>/dev/null; then
           echo "source ~/.config/nushell/termuxify_config.nu" >> "$HOME/.config/nushell/config.nu"
       fi
-      update_config "$HOME/.bashrc" "if [[ $- == *i* ]] && [ -z \"$NU_VERSION\" ]; then exec nu; fi"
+      update_config "$HOME/.bashrc" "if [[ \$- == *i* ]] && [ -z \"$NU_VERSION\" ]; then exec nu; fi"
       chsh -s nu || true
       ;;
     "Bash")
@@ -145,14 +313,14 @@ EOF
     "Zsh")
       call_gum spin --spinner dot --title "Installing Zsh..." -- pkg install -y zsh
       update_config "$HOME/.zshrc" "eval \"\$(starship init zsh)\"\neval \"\$(atuin init zsh)\"\nnerdfetch"
-      update_config "$HOME/.bashrc" "if [[ $- == *i* ]] && [ -z \"$ZSH_VERSION\" ]; then exec zsh; fi"
+      update_config "$HOME/.bashrc" "if [[ \$- == *i* ]] && [ -z \"$ZSH_VERSION\" ]; then exec zsh; fi"
       chsh -s zsh || true
       ;;
     "Fish")
       call_gum spin --spinner dot --title "Installing Fish..." -- pkg install -y fish
       mkdir -p "$HOME/.config/fish"
       update_config "$HOME/.config/fish/config.fish" "starship init fish | source\natuin init fish | source\nnerdfetch"
-      update_config "$HOME/.bashrc" "if [[ $- == *i* ]] && [ -z \"$FISH_VERSION\" ]; then exec fish; fi"
+      update_config "$HOME/.bashrc" "if [[ \$- == *i* ]] && [ -z \"$FISH_VERSION\" ]; then exec fish; fi"
       chsh -s fish || true
       ;;
   esac

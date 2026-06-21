@@ -134,19 +134,19 @@ EOF
             echo "source ~/.config/nushell/termuxify_config.nu" >> "$HOME/.config/nushell/config.nu"
         fi
 
-        update_config "$HOME/.bashrc" "if [[ $- == *i* ]] && [ -z \"$NU_VERSION\" ]; then exec nu; fi"
+        update_config "$HOME/.bashrc" "if [[ \$- == *i* ]] && [ -z \"$NU_VERSION\" ]; then exec nu; fi"
         ;;
     "bash")
         update_config "$HOME/.bashrc" "eval \"\$(starship init bash)\"\neval \"\$(atuin init bash)\"\nnerdfetch"
         ;;
     "zsh")
         update_config "$HOME/.zshrc" "eval \"\$(starship init zsh)\"\neval \"\$(atuin init zsh)\"\nnerdfetch"
-        update_config "$HOME/.bashrc" "if [[ $- == *i* ]] && [ -z \"$ZSH_VERSION\" ]; then exec zsh; fi"
+        update_config "$HOME/.bashrc" "if [[ \$- == *i* ]] && [ -z \"$ZSH_VERSION\" ]; then exec zsh; fi"
         ;;
     "fish")
         mkdir -p "$HOME/.config/fish"
         update_config "$HOME/.config/fish/config.fish" "starship init fish | source\natuin init fish | source\nnerdfetch"
-        update_config "$HOME/.bashrc" "if [[ $- == *i* ]] && [ -z \"$FISH_VERSION\" ]; then exec fish; fi"
+        update_config "$HOME/.bashrc" "if [[ \$- == *i* ]] && [ -z \"$FISH_VERSION\" ]; then exec fish; fi"
         ;;
 esac
 
